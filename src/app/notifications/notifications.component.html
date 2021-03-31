@@ -1,0 +1,159 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="card">
+          <div class="card-header card-header-danger">
+              <h3 class="card-title">Notifications</h3>
+              <p class="card-category">This is notifications you will receive from
+                  <a target="_blank" href="#">Jus' Potatoes users</a>. and
+                  <a href="#" target="_blank">system notifications.</a>
+              </p>
+          </div>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+              Talk to Admin
+          </button>
+
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Talk to Admin</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+                      <div class="modal-body">
+                          <!--Material textarea-->
+                          <div class="md-form mb-4 pink-textarea active-pink-textarea"  >
+                              <textarea id="form18" class="md-textarea form-control" rows="3" [(ngModel)]="message"></textarea>
+                              <label for="form18"></label>
+                              <select id="role" name="role" [(ngModel)]="message_header" class="form-control custom-select bg-white border-left-0 border-md">
+                                  <option value="OTHER">OTHER</option>
+                                  <option value="ENQUIRY">ENQUIRY</option>
+                                  <option value="COMPLIMENT">COMPLIMENT</option>
+                                  <option selected value="COMPLAINT">COMPLAINT</option>
+                              </select>
+                          </div>
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="createMessage()">Send Message</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="card-body">
+              <div class="row">
+                  <div class="col-md-6">
+                      <h3 class="card-title">Messages</h3>
+                      <div *ngFor="let message of Messages">
+                      <div class="alert alert-info alert-with-icon" data-notify="container">
+                          <i class="material-icons" data-notify="icon">add_alert</i>
+                          <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="deleteMessage(message._id)">
+                              <i class="material-icons">close</i>
+                          </button>
+                          <span data-notify="message"><b>From:</b> {{message.sender.username}}</span>
+                          <span data-notify="message"><b>Header:</b> {{message.messageHeader}}</span>
+                          <span data-notify="message"><b>Message:</b> {{message.message}}</span>
+
+                          <br >
+                          <div *ngFor="let text of message.textMessages">
+                              <span data-notify="message"><b>{{message.sender.username}}: </b> {{text.text}}</span>
+                          </div>
+
+                          <form>
+                              <div class="form-group">
+                                  <label for="exampleInputEmail1">REPLY</label>
+                                  <input type="text" id="replyMessage" name="replyMessage" [(ngModel)]="replyMessage" class="form-control" id="exampleInputEmail1" placeholder="reply to admin">
+                                  <small id="emailHelp" class="form-text text-muted">type your reply here</small>
+                                  <button (click)="reply(message._id)" class="btn btn-success">Reply</button>
+                              </div>
+                          </form>
+                      </div>
+                      </div>
+                  </div>
+                  <div class="col-md-6">
+                      <h3 class="card-title">System Messages</h3>
+                      <div class="alert alert-info">
+                          <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <i class="material-icons">close</i>
+                          </button>
+                          <span>
+                              <b> Info - </b> This is a regular notification made with ".alert-info"</span>
+                      </div>
+                      <div class="alert alert-success">
+                          <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <i class="material-icons">close</i>
+                          </button>
+                          <span>
+                              <b> Success - </b> This is a regular notification made with ".alert-success"</span>
+                      </div>
+                      <div class="alert alert-warning">
+                          <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <i class="material-icons">close</i>
+                          </button>
+                          <span>
+                              <b> Warning - </b> This is a regular notification made with ".alert-warning"</span>
+                      </div>
+                      <div class="alert alert-danger">
+                          <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <i class="material-icons">close</i>
+                          </button>
+                          <span>
+                              <b> Danger - </b> This is a regular notification made with ".alert-danger"</span>
+                      </div>
+                      <div class="alert alert-primary">
+                          <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <i class="material-icons">close</i>
+                          </button>
+                          <span>
+                              <b> Primary - </b> This is a regular notification made with ".alert-primary"</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-12">
+              <div class="places-buttons">
+                  <div class="row">
+                      <div class="col-md-6 ml-auto mr-auto text-center">
+                          <h4 class="card-title">
+                              Notifications Places
+                              <p class="category">Click to view notifications</p>
+                          </h4>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-lg-8 col-md-10 ml-auto mr-auto">
+                          <div class="row">
+                              <div class="col-md-4">
+                                  <button mat-raised-button class="btn btn-danger btn-block" (click)="showNotification('top','left')">Top Left</button>
+                              </div>
+                              <div class="col-md-4">
+                                  <button mat-raised-button class="btn btn-danger btn-block" (click)="showNotification('top','center')">Top Center</button>
+                              </div>
+                              <div class="col-md-4">
+                                  <button mat-raised-button class="btn btn-danger btn-block" (click)="showNotification('top','right')">Top Right</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-lg-8 col-md-10 ml-auto mr-auto">
+                          <div class="row">
+                              <div class="col-md-4">
+                                  <button mat-raised-button class="btn btn-danger btn-block" (click)="showNotification('bottom','left')">Bottom Left</button>
+                              </div>
+                              <div class="col-md-4">
+                                  <button mat-raised-button class="btn btn-danger btn-block" (click)="showNotification('bottom','center')">Bottom Center</button>
+                              </div>
+                              <div class="col-md-4">
+                                  <button mat-raised-button class="btn btn-danger btn-block" (click)="showNotification('bottom','right')">Bottom Right</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

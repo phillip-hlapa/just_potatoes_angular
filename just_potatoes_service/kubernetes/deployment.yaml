@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jus-potatoes-service-deployment
+  labels:
+    app: jus-potatoes
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jus-potatoes
+  template:
+    metadata:
+      labels:
+        app: jus-potatoes
+    spec:
+      containers:
+      - name: jus-potatoes
+        image: philliphlapa/jus-potatoes-service
+        ports:
+        - containerPort: 1993

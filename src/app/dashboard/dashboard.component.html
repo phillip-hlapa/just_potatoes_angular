@@ -1,0 +1,261 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                  <div class="card-header card-header-warning card-header-icon">
+                      <div class="card-icon">
+                          <i class="material-icons">content_copy</i>
+                      </div>
+                      <p class="card-category">Number of Users</p>
+                      <h3 class="card-title">{{UsersSize}}
+                          <small>Users</small>
+                      </h3>
+                  </div>
+                  <div class="card-footer">
+                      <div class="stats">
+                          <i class="material-icons text-success">info</i>
+                          <p><b>List of jus' potatoes users</b></p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                  <div class="card-header card-header-success card-header-icon">
+                      <div class="card-icon">
+                          <i class="material-icons">store</i>
+                      </div>
+                      <p class="card-category">Revenue</p>
+                      <h3 class="card-title">R34,245.00</h3>
+                  </div>
+                  <div class="card-footer">
+                      <div class="stats">
+                          <i class="material-icons">date_range</i><b>In the last Month</b>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                  <div class="card-header card-header-danger card-header-icon">
+                      <div class="card-icon">
+                          <i class="material-icons">info_outline</i>
+                      </div>
+                      <p class="card-category">Number of notifications</p>
+                      <h3 class="card-title">75</h3>
+                  </div>
+                  <div class="card-footer">
+                      <div class="stats">
+                          <i class="material-icons">local_offer</i><b>Tracked from database</b>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                  <div class="card-header card-header-info card-header-icon">
+                      <div class="card-icon">
+                          <i class="fa fa-twitter"></i>
+                      </div>
+                      <p class="card-category">Followers</p>
+                      <h3 class="card-title">+245</h3>
+                  </div>
+                  <div class="card-footer">
+                      <div class="stats">
+                          <i class="material-icons">update</i><b>Number of jus'potatoes followers on Twitter</b>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-md-4">
+              <div class="card card-chart">
+                  <div class="card-header card-header-success">
+                      <div class="ct-chart" id="dailySalesChart"></div>
+                  </div>
+                  <div class="card-body">
+                      <h4 class="card-title">Monthly Sales</h4>
+                      <p class="card-category">
+                          <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
+                  </div>
+                  <div class="card-footer">
+                      <div class="stats">
+                          <i class="material-icons">access_time</i> updated every month end
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-4">
+              <div class="card card-chart">
+                  <div class="card-header card-header-warning">
+                      <div class="ct-chart" id="websiteViewsChart"></div>
+                  </div>
+                  <div class="card-body">
+                      <h4 class="card-title">Email Subscriptions</h4>
+                      <p class="card-category">Last Company Performance</p>
+                  </div>
+                  <div class="card-footer">
+                      <div class="stats">
+                          <i class="material-icons">access_time</i> updated every month end
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-4">
+              <div class="card card-chart">
+                  <div class="card-header card-header-danger">
+                      <div class="ct-chart" id="completedTasksChart"></div>
+                  </div>
+                  <div class="card-body">
+                      <h4 class="card-title">Completed Orders</h4>
+                      <p class="card-category">Last Company Performance</p>
+                  </div>
+                  <div class="card-footer">
+                      <div class="stats">
+                          <i class="material-icons">access_time</i> updated every month end
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    <!-- WHERE THE BOTTOM TABLES START-->
+    <!-- WHERE THE FIRST TABLE START-->
+        <div class="row">
+          <div class="col-lg-12 col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-warning">
+                      <h4 class="card-title">Manage Orders</h4>
+                      <p class="card-category">Manage orders => click on Order ID to get more details of the order</p>
+                  </div>
+                  <div class="card-body table-responsive">
+                      <table class="table table-hover">
+                          <thead class="text-warning">
+                              <th>Order ID</th>
+                              <th>From</th>
+                              <th>Date</th>
+                              <th>Total</th>
+                              <th>Accept Order</th>
+                              <th>Decline Order</th>
+                              <th>Dispatch Order</th>
+                              <th>Reverse Declined Order</th>
+                              <th>Order Status</th>
+                          </thead>
+                          <tbody>
+                              <tr *ngFor="let order of Orders">
+                                  <td><button class="btn btn-link" data-toggle="modal" data-target="#exampleModal" (click)="getUserOrder(order._id)">{{order._id}}</button></td>
+                                  <td>{{order.order_by.username}}</td>
+                                  <td>{{order.order_date.split('T')[0]}} <b>{{order.order_date.split('T')[1].split('.')[0]}}</b></td>
+                                  <td>R{{order.order_total}}</td>
+                                  <th><button type="button" name="button" [disabled]="!userIsAdmin" (click)="acceptOrder(order._id)" *ngIf="order.order_status != 'ACCEPTED' && order.order_status != 'DECLINED' && order.order_status != 'DISPATCHED'" class="btn btn-outline-success btn-sm">accept</button></th>
+                                  <td><button type="button" name="button" [disabled]="!userIsAdmin" (click)="declineOrder(order._id)" *ngIf="order.order_status != 'ACCEPTED' && order.order_status != 'DECLINED' && order.order_status != 'DISPATCHED'" class="btn btn-outline-danger btn-sm">decline</button></td>
+                                  <td><button type="button" name="button" [disabled]="!userIsAdmin" (click)="dispatchOrder(order._id)" *ngIf="order.order_status === 'ACCEPTED'"class="btn btn-outline-secondary btn-sm">dispatch</button></td>
+                                  <td><button type="button" name="button" [disabled]="!userIsAdmin" (click)="reverseOrder(order._id)"  *ngIf="order.order_status === 'DECLINED'" class="btn btn-outline-warning btn-sm">reverse</button></td>
+                                  <td><label>{{order.order_status}}</label>
+                              </tr>
+
+
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <!-- WHERE THE SECOND TABLE START USERS -->
+        <div class="row"> <!--HERE -->
+            <div class="col-lg-12 col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-success">
+                        <h4 class="card-title">Manage Users</h4>
+                        <p class="card-category">Active users of the Jus' Potatoes</p>
+                    </div>
+                    <div class="card-body table-responsive">
+                        <table class="table table-hover" >
+                            <thead class="text-warning">
+                                <th>ID</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Street Name</th>
+                                <th>Role</th>
+                                <th *ngIf="userIsAdmin">Update Role</th>
+                                <th *ngIf="userIsAdmin">Delete</th>
+
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let user of Users">
+                                    <td>{{user._id}}</td>
+                                    <td>{{user.username}}</td>
+                                    <td>{{user.contact.email}}</td>
+                                    <td>{{user.address.street_name}}</td>
+                                    <td><input value="{{user.role}}" id="role" class="form-control" disabled></td>
+                                    <td><button type="button" name="button" (click)="onUpdateRole(user._id)" *ngIf="userIsAdmin" class="btn btn-outline-secondary btn-sm">Update Role</button></td>
+                                    <td><button type="button" name="button" (click)="onDelete(user._id)" *ngIf="userIsAdmin" class="btn btn-outline-danger btn-sm">Remove</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+          </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel" ><b *ngIf="OrderByUser != null">Order Details of {{OrderByUser.order_by.username}}</b></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                   <table class="table-striped" >
+                        <tbody>
+                            <tr>
+                                <td>Total Price</td>
+                                <td>Email</td>
+                                <td>Status</td>
+                            </tr>
+                            <tr *ngIf="OrderByUser != null">
+                                <td>R{{OrderByUser.order_total}}</td>
+                                <td>{{OrderByUser.order_by.contact.email}}</td>
+                                <td>{{OrderByUser.order_status}}</td>
+                            </tr>
+                            <br>
+                            <tr><h6>Product List</h6></tr>
+                        </tbody>
+                   </table>
+                    <div *ngIf="OrderByUser != null">
+                      <ol  class="form-control" *ngFor="let prod of OrderByUser.order_products" >
+                        <li>{{prod.product_name}}</li>
+                     </ol>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </div>
