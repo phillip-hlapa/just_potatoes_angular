@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Observable} from "rxjs/Observable";
+import {Observable} from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -7,13 +7,13 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UsersService {
 
-  //endpoint_url = "http://192.168.39.233"
-  endpoint_url = "https://damp-sands-73285.herokuapp.com"
-  //endpoint_url = "http://localhost:1993"
-
+  // endpoint_url = "http://192.168.39.233"
+  // endpoint_url = 'https://damp-sands-73285.herokuapp.com'
+   // endpoint_url = 'http://localhost:1993'
+    endpoint_url = 'https://cherry-cobbler-84144.herokuapp.com';
   constructor(private httpClient: HttpClient) { }
 
-  //get all users
+  // get all users
   public getUsers(): Observable<Object> {
     return this.httpClient.get(this.endpoint_url + '/api/users');
   }
@@ -36,10 +36,10 @@ export class UsersService {
   }
 
     public isAuthenticated() {
-        this.getUserById(localStorage.getItem("userId")).subscribe(user => {
-          if(user) {
-            let FoundUser: any = user;
-            if(FoundUser != null && FoundUser._role != null) {
+        this.getUserById(localStorage.getItem('userId')).subscribe(user => {
+          if (user) {
+            const FoundUser: any = user;
+            if (FoundUser != null && FoundUser._role != null) {
               return true;
             }
           }
@@ -48,7 +48,7 @@ export class UsersService {
       return  false;
     }
 
-   public verifyViaOTP(optValue: any) : Observable<Object>  {
+   public verifyViaOTP(optValue: any): Observable<Object>  {
       return this.httpClient.post(this.endpoint_url + '/api/users/validate', optValue);
 
     }

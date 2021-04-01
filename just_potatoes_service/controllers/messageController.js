@@ -61,7 +61,8 @@ module.exports.createConversation = (req, res) => {
         if(message) {
           console.log("message exist" + message)
          var txt = new Text({
-             text: data.text
+             text: data.text,
+             replyFrom: data.replyFrom
          });
          txt.save().then(savedTxt => {
            Message.findOneAndUpdate({ _id: data.messageId}, { $push: { textMessages: savedTxt._id }}).then(updatedMessage => {

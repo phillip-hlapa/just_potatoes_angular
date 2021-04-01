@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MessagesService } from '../../services/messages/messages.service';
-import { UsersService} from "../../services/users/users.service";
+import { UsersService} from '../../services/users/users.service';
 
 declare var $: any;
 @Component({
@@ -18,25 +18,26 @@ message_header: any;
 message: any;
 
 replyMessage: any;
+replyFrom: any;
 
   constructor(private messagesService: MessagesService, private userService: UsersService) { }
-  showNotification(from, align){
+  showNotification(from, align) {
 
-      if(this.MessageIndex < this.MessageLength){
+      if (this.MessageIndex < this.MessageLength) {
         this.MessageIndex++;
       } else {
         this.MessageIndex = 0;
       }
 
-      const type = ['','info','success','warning','danger'];
+      const type = ['', 'info', 'success', 'warning', 'danger'];
 
       const color = Math.floor((Math.random() * 4) + 1);
 
       $.notify({
-          icon: "notifications",
+          icon: 'notifications',
           message: this.Messages[this.MessageIndex < this.MessageLength ? this.MessageIndex : 0].message
 
-      },{
+      }, {
           type: type[color],
           timer: 4000,
           placement: {
@@ -63,15 +64,15 @@ deleteMessage(messageId) {
 }
 
 createMessage() {
-    let message = {
+    const message = {
         message_header: this.message_header,
-        sender: localStorage.getItem("userId"),
+        sender: localStorage.getItem('userId'),
         message: this.message,
     }
     console.log(message);
     this.messagesService.createMessage(message).subscribe(response => {
         console.log(response)
-        if(response) {
+        if (response) {
             this.ngOnInit();
         }
     }, error => {
@@ -81,12 +82,13 @@ createMessage() {
 
   ngOnInit() {
       this.replyMessage = '';
-      let UserId = localStorage.getItem('userId');
+      const UserId = localStorage.getItem('userId');
       this.userService.getUserById(UserId).subscribe(response => {
-          if(response) {
-              let user: any = response;
+          if (response) {
+              const user: any = response;
+              this.replyFrom = user.username;
               console.log(user.role)
-              if(user.role === 'ADMIN') {
+              if (user.role === 'ADMIN') {
                   this.messagesService.getAllMessages().subscribe(messages => {
                       console.log(messages)
                       this.Messages = messages;
@@ -109,13 +111,14 @@ createMessage() {
   }
 
     reply(_id: any) {
-      let text: any = {
+      const text: any = {
           messageId: _id,
-          text: this.replyMessage
+          text: this.replyMessage,
+          replyFrom: this.replyFrom
       };
 
       this.messagesService.createMessageConversation(text).subscribe(response => {
-          if(response) {
+          if (response) {
               console.log(response)
               this.ngOnInit();
           }

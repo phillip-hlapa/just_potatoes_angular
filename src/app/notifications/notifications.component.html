@@ -58,7 +58,7 @@
 
                           <br >
                           <div *ngFor="let text of message.textMessages">
-                              <span data-notify="message"><b>{{message.sender.username}}: </b> {{text.text}}</span>
+                              <span data-notify="message"><b>{{text.replyFrom}}: </b> {{text.text}}</span>
                           </div>
 
                           <form>
