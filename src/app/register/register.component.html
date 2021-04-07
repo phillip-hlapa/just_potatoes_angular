@@ -15,7 +15,7 @@
     <div class="row py-5 mt-4 align-items-center">
         <!-- For Demo Purpose -->
         <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
-            <img src="https://res.cloudinary.com/mhmd/image/upload/v1569543678/form_d9sh6m.svg" alt="" class="img-fluid mb-3 d-none d-md-block">
+            <img src="./assets/img/jus_potatoes.svg" alt="" class="img-fluid mb-3 d-none d-md-block">
             <h1>Register with us to get the best service!</h1>
             <p class="font-italic text-muted mb-0" *ngIf="!isRegister">all about potatoes, Jus'potatoes</p>
             <p class="font-italic text-muted mb-0" *ngIf="isRegister && !userValidationError">Please verify account with the OTP sent to your email!</p>
@@ -115,7 +115,7 @@
 
                     <!-- Submit Button -->
                     <div class="form-group col-lg-12 mx-auto mb-0">
-                        <a (click)="register()" class="btn btn-primary btn-block py-2">
+                        <a (click)="register()" class="btn btn-warning btn-block py-2">
                             <span class="font-weight-bold">Create your account</span>
                         </a>
                     </div>
@@ -146,7 +146,7 @@
             </div>
             <input id="optValue" type="text" name="optValue" id="optValue" [(ngModel)]="optValue" placeholder="optValue" class="form-control bg-white border-left-0 border-md">
             <div class="form-group col-lg-12 mx-auto mb-0">
-                <a (click)="verifyOTP()" class="btn btn-primary btn-block py-2">
+                <a (click)="verifyOTP()" class="btn btn-warning btn-block py-2">
                     <span class="font-weight-bold">Verify Account</span>
                 </a>
             </div>
