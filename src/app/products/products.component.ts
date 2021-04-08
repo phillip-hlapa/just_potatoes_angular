@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/products/product.service';
 import {UsersService} from '../../services/users/users.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -9,7 +10,7 @@ import {UsersService} from '../../services/users/users.service';
 })
 export class ProductsComponent implements OnInit {
 
-  constructor(private productService: ProductService, private userService: UsersService) { }
+  constructor(private router: Router, private productService: ProductService, private userService: UsersService) { }
 
   Products;
   Order: Array<any> = [];
@@ -22,6 +23,7 @@ export class ProductsComponent implements OnInit {
 
   //submitting order
    submitButtonAvailable = true;
+   isLoading: boolean = false;
 
   ngOnInit(): void {
     this.GetProducts();
@@ -37,9 +39,9 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  public add_product(product_id: any){
+  public add_product(product_id: any) {
       this.Order.push(product_id);
-      if(this.Order.length > 0) {
+      if (this.Order.length > 0) {
           this.isThereOrder = true;
       }
       this.doOrder(product_id);
@@ -55,9 +57,9 @@ export class ProductsComponent implements OnInit {
           })
   }
   private deleteProdFromOrder(product_id: any) {
-      for(let i = 0; i < this.Order.length; i++) {
+      for (let i = 0; i < this.Order.length; i++) {
           let myProduct: any;
-          if(this.Order[i] === product_id) {
+          if (this.Order[i] === product_id) {
               this.productService.getProduct(product_id).subscribe(product => {
                   myProduct = product;
                   this.OrderTotal = this.OrderTotal - (parseInt(myProduct.product_price) * this.quantity)
@@ -82,7 +84,7 @@ export class ProductsComponent implements OnInit {
         this.productService.getProduct(product_id).subscribe(product => {
             myProduct = product;
             console.log(this.quantity)
-            if(this.quantity >= 1) {
+            if (this.quantity >= 1) {
                 if(this.quantity > this.previousQuantity) {
                     this.previousQuantity = this.quantity;
                     this.OrderTotal = this.OrderTotal + (parseInt(myProduct.product_price) * this.quantity)
@@ -100,16 +102,22 @@ export class ProductsComponent implements OnInit {
     }
 
     private onSubmitOrder() {
-        let orderDetails = {
+      console.log("hao !!!!!!")
+      this.isLoading = true;
+        const orderDetails = {
             order_total: this.OrderTotal,
             order_products: this.Order,
-            order_by: localStorage.getItem("userId")
+            order_by: localStorage.getItem('userId')
         }
         this.productService.submitOrder(orderDetails).subscribe(result => {
             this.submitButtonAvailable = false;
-            if(result) {
-                console.log(result)
+            if (result) {
+                this.isLoading = false;
             }
         })
+    }
+
+   private goHome() {
+        this.router.navigateByUrl('home').then(homeUrl => {})
     }
 }

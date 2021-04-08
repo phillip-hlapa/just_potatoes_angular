@@ -1,6 +1,30 @@
 <br />
 <br />
-<div class="container">
+
+<div class="container" align="center" *ngIf="isLoading">
+  <mat-spinner color="warn" ></mat-spinner>
+  <br><br>
+  <!-- For Demo Purpose -->
+  <div class="col-md-2">
+    <img src="./assets/img/firebog-garden-sign-crop-01a-g1.svg" alt="" class="img-fluid mb-3 d-none d-md-block">
+    <h6>One Second while we place your order</h6>
+    <p class="font-italic text-muted mb-0">Jus'potatoes, we are potatoes</p>
+  </div>
+</div>
+
+<div class="container" align="center" *ngIf="!isLoading && !submitButtonAvailable">
+  <!-- For Demo Purpose -->
+  <div class="col-md-2">
+    <img src="./assets/img/dwcheckyes.svg" alt="" class="img-fluid mb-3 d-none d-md-block">
+    <h6>DONE! please find the slip sent to your email</h6>
+    <br>
+    <button class="btn btn-success" (click)="goHome()">go home</button>
+  </div>
+</div>
+
+
+
+<div class="container" *ngIf="!isLoading && submitButtonAvailable">
 <div class="col">
 <table class="table" >
   <tr *ngFor="let product of Products">
