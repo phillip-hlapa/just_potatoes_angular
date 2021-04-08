@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../../services/users/users.service';
-import { ProductService } from "../../services/products/product.service";
+import { ProductService } from '../../services/products/product.service';
 import * as Chartist from 'chartist';
 
 @Component({
@@ -10,26 +10,34 @@ import * as Chartist from 'chartist';
 })
 export class DashboardComponent implements OnInit {
 
-//USERS
+
+// USERS
 Users: any;
 UsersSize = 0;
 userIsAdmin = false;
-UserRole: any = ["ADMIN", "SUPERUSER", "NORMAL"]
+UserRole: any = ['ADMIN', 'SUPERUSER', 'NORMAL']
 UserRoleCount = 0;
-//Orders
+// Orders
 Orders: any;
 OrderByUser: any = null;
 
+//
+revenue = 0;
+
+  // deleting users
+    acceptedOrder = false;
+    role: any;
+
 
   constructor(private usersService: UsersService, private productService: ProductService) { }
-  startAnimationForLineChart(chart){
+  startAnimationForLineChart(chart) {
       let seq: any, delays: any, durations: any;
       seq = 0;
       delays = 80;
       durations = 500;
 
       chart.on('draw', function(data) {
-        if(data.type === 'line' || data.type === 'area') {
+        if (data.type === 'line' || data.type === 'area') {
           data.element.animate({
             d: {
               begin: 600,
@@ -39,7 +47,7 @@ OrderByUser: any = null;
               easing: Chartist.Svg.Easing.easeOutQuint
             }
           });
-        } else if(data.type === 'point') {
+        } else if (data.type === 'point') {
               seq++;
               data.element.animate({
                 opacity: {
@@ -54,15 +62,14 @@ OrderByUser: any = null;
       });
 
       seq = 0;
-  };
-  startAnimationForBarChart(chart){
+  }  startAnimationForBarChart(chart) {
       let seq2: any, delays2: any, durations2: any;
 
       seq2 = 0;
       delays2 = 80;
       durations2 = 500;
       chart.on('draw', function(data) {
-        if(data.type === 'bar'){
+        if (data.type === 'bar') {
             seq2++;
             data.element.animate({
               opacity: {
@@ -77,8 +84,7 @@ OrderByUser: any = null;
       });
 
       seq2 = 0;
-  };
-  ngOnInit() {
+  }  ngOnInit() {
       /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
 
 
@@ -98,7 +104,7 @@ OrderByUser: any = null;
           chartPadding: { top: 0, right: 0, bottom: 0, left: 0},
       }
 
-      var dailySalesChart = new Chartist.Line('#dailySalesChart', dataDailySalesChart, optionsDailySalesChart);
+      const dailySalesChart = new Chartist.Line('#dailySalesChart', dataDailySalesChart, optionsDailySalesChart);
 
       this.startAnimationForLineChart(dailySalesChart);
 
@@ -121,7 +127,7 @@ OrderByUser: any = null;
           chartPadding: { top: 0, right: 0, bottom: 0, left: 0}
       }
 
-      var completedTasksChart = new Chartist.Line('#completedTasksChart', dataCompletedTasksChart, optionsCompletedTasksChart);
+      const completedTasksChart = new Chartist.Line('#completedTasksChart', dataCompletedTasksChart, optionsCompletedTasksChart);
 
       // start animation for the Completed Tasks Chart - Line Chart
       this.startAnimationForLineChart(completedTasksChart);
@@ -130,14 +136,14 @@ OrderByUser: any = null;
 
       /* ----------==========     Emails Subscription Chart initialization    ==========---------- */
 
-      var datawebsiteViewsChart = {
+      const datawebsiteViewsChart = {
         labels: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
         series: [
           [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]
 
         ]
       };
-      var optionswebsiteViewsChart = {
+      const optionswebsiteViewsChart = {
           axisX: {
               showGrid: false
           },
@@ -145,7 +151,7 @@ OrderByUser: any = null;
           high: 1000,
           chartPadding: { top: 0, right: 5, bottom: 0, left: 0}
       };
-      var responsiveOptions: any[] = [
+      const responsiveOptions: any[] = [
         ['screen and (max-width: 640px)', {
           seriesBarDistance: 5,
           axisX: {
@@ -155,9 +161,9 @@ OrderByUser: any = null;
           }
         }]
       ];
-      var websiteViewsChart = new Chartist.Bar('#websiteViewsChart', datawebsiteViewsChart, optionswebsiteViewsChart, responsiveOptions);
+      const websiteViewsChart = new Chartist.Bar('#websiteViewsChart', datawebsiteViewsChart, optionswebsiteViewsChart, responsiveOptions);
 
-      //start animation for the Emails Subscription Chart
+      // start animation for the Emails Subscription Chart
       this.startAnimationForBarChart(websiteViewsChart);
 
       this.usersService.getUsers().subscribe(users => {
@@ -169,37 +175,36 @@ OrderByUser: any = null;
       this.productService.getOrders().subscribe(response => {
           console.log(response)
           this.Orders = response;
+          if (this.Orders) {
+              this.calculateRevenue(this.Orders);
+          }
       }, error => {
           console.log(error)
       })
 
-      //get user role
+      // get user role
       this.getUserRole();
 
   }
-
-  //deleting users
-    acceptedOrder: boolean = false;
-    role: any;
   onDelete(userId) {
       console.log(userId)
       this.usersService.deleteUser(userId).subscribe(message => {console.log(message)})
       this.ngOnInit();
   }
 
-  //update user role
+  // update user role
     onUpdateRole(_id: any) {
         this.UserRoleCount++;
-      if(this.UserRoleCount == 3) {
+      if (this.UserRoleCount === 3) {
           this.UserRoleCount = 0;
       }
         console.log(_id);
-        let userRole = {
+        const userRole = {
             userId: _id,
             role: this.UserRole[this.UserRoleCount]
         }
         this.usersService.updateRole(userRole).subscribe(userRoleResponse => {
-            if(userRoleResponse){
+            if (userRoleResponse) {
                 this.ngOnInit();
             }
         })
@@ -207,8 +212,8 @@ OrderByUser: any = null;
 
     getUserRole() {
       this.usersService.getUserById(localStorage.getItem('userId')).subscribe(userResponse => {
-          let user: any = userResponse;
-          if(user.role === 'ADMIN' || user.role === 'SUPERUSER'){
+          const user: any = userResponse;
+          if (user.role === 'ADMIN' || user.role === 'SUPERUSER') {
               this.userIsAdmin = true;
           } else {
               this.userIsAdmin = false;
@@ -221,23 +226,23 @@ OrderByUser: any = null;
     acceptOrder(_id: any) {
         this.productService.acceptOrder(_id).subscribe(acceptedOrder => {
             console.log(acceptedOrder);
-            if(acceptedOrder) {
+            if (acceptedOrder) {
                 this.acceptedOrder = true;
             }
             this.ngOnInit();
         })
     }
 
-    //order management
+    // order management
     declineOrder(_id: any) {
-        this.productService.declineOrder(_id).subscribe(declinedOrder => {console.log(declinedOrder); this.ngOnInit();})
+        this.productService.declineOrder(_id).subscribe(declinedOrder => {console.log(declinedOrder); this.ngOnInit(); })
     }
     dispatchOrder(_id: any) {
-        this.productService.dispatchOrder(_id).subscribe(dispatchOrder => {console.log(dispatchOrder); this.ngOnInit();})
+        this.productService.dispatchOrder(_id).subscribe(dispatchOrder => {console.log(dispatchOrder); this.ngOnInit(); })
     }
 
     reverseOrder(_id: any) {
-        this.productService.reverseOrder(_id).subscribe(reverseOrder => {console.log(reverseOrder); this.ngOnInit();})
+        this.productService.reverseOrder(_id).subscribe(reverseOrder => {console.log(reverseOrder); this.ngOnInit(); })
     }
 
 
@@ -248,5 +253,11 @@ OrderByUser: any = null;
         }, error => {
             console.log(error)
         })
+    }
+    // revenue calculation
+    calculateRevenue(orders: any) {
+      orders.forEach(order => {
+          this.revenue = this.revenue + order.order_total;
+      })
     }
 }

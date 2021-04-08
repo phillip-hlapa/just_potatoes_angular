@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from "../../services/products/product.service";
+import { ProductService } from '../../services/products/product.service';
+import {UsersService} from '../../services/users/users.service';
 
 @Component({
   selector: 'app-products',
@@ -8,7 +9,7 @@ import { ProductService } from "../../services/products/product.service";
 })
 export class ProductsComponent implements OnInit {
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService, private userService: UsersService) { }
 
   Products;
   Order: Array<any> = [];
@@ -17,12 +18,14 @@ export class ProductsComponent implements OnInit {
   isThereOrder = false;
   quantity = 1;
   previousQuantity = 0;
+  canOrder: boolean;
 
   //submitting order
    submitButtonAvailable = true;
 
   ngOnInit(): void {
     this.GetProducts();
+    this.canOrder = this.userService.verifyAuth();
   }
 
   private GetProducts() {
@@ -44,7 +47,7 @@ export class ProductsComponent implements OnInit {
 
   private doOrder(product_id) {
           this.productService.getProduct(product_id).subscribe(productOrdered => {
-              let orderedProduct: any = productOrdered;
+              const orderedProduct: any = productOrdered;
               this.submitButtonAvailable = true;
               this.OrderTotal = this.OrderTotal + parseInt(orderedProduct.product_price);
               this.OrderedProducts.push(productOrdered);
@@ -61,7 +64,7 @@ export class ProductsComponent implements OnInit {
                   this.OrderedProducts.splice(this.OrderedProducts.indexOf(myProduct), 1)
                   this.Order.splice(this.Order.indexOf(product_id), 1)
 
-                  if(this.Order.length === 0) {
+                  if (this.Order.length === 0) {
                       this.OrderTotal = 0;
                       this.submitButtonAvailable = false;
                   } else {

@@ -27,6 +27,8 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ProductsComponent } from './products/products.component';
 import { HomeComponent } from './home/home.component';
+import { LogoutComponent } from './logout/logout.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   imports: [
@@ -39,7 +41,8 @@ import { HomeComponent } from './home/home.component';
     AppRoutingModule,
     AgmCoreModule.forRoot({
       apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
-    })
+    }),
+    MatProgressSpinnerModule
   ],
   declarations: [
     AppComponent,
@@ -48,6 +51,7 @@ import { HomeComponent } from './home/home.component';
     RegisterComponent,
     ProductsComponent,
     HomeComponent,
+    LogoutComponent,
 
   ],
   providers: [],

@@ -31,20 +31,22 @@ export class RegisterComponent implements OnInit {
   optValue: any;
 
   userValidationError;
+  isLoading: boolean = false;
 
   ngOnInit(): void {
   }
 
 
   register() {
-    console.log("register here " + this.username + " " + this.password + " " + this.passwordConfirmation + " " + this.email + " " + this.street_name + " " + this.house_number + " " + this.cell_number + " " + this.zone);
-    if(this.password != this.passwordConfirmation) {
+
+    if (this.password !== this.passwordConfirmation) {
       console.log('not valid 1')
         this.formIsValid = false;
-    } else if(!this.password || !this.passwordConfirmation || !this.username|| !this.street_name || !this.cell_number || !this.email || !this.house_number) {
+    } else if (!this.password || !this.passwordConfirmation || !this.username|| !this.street_name || !this.cell_number || !this.email || !this.house_number) {
       console.log('not valid 2')
       this.formIsValid = false;
     } else {
+      this.isLoading = true;
       this.User = {
         username: this.username,
         password: this.password,
@@ -57,9 +59,10 @@ export class RegisterComponent implements OnInit {
       this.userService.createNewUser(this.User).subscribe(createdUser => {
         console.log(createdUser);
         let response: any = createdUser;
-        if(response) {
-          let id: any = response._id;
-          localStorage.setItem("userId", id)
+        if (response) {
+          this.isLoading = false;
+          const id: any = response._id;
+          localStorage.setItem('userId', id)
           this.isRegister = true;
          // this.router.navigateByUrl('home').then(r => {});
         }

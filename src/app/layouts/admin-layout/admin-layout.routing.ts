@@ -12,7 +12,9 @@ import { LoginComponent } from '../../login/login.component';
 import { RegisterComponent } from '../../register/register.component';
 import { ProductsComponent } from '../../products/products.component';
 import { HomeComponent } from '../../home/home.component';
-import {AuthGuardService} from "../../../services/guards/auth-guard.service";
+import {AuthGuardService} from '../../../services/guards/auth-guard.service';
+import {SidebarComponent} from '../../components/sidebar/sidebar.component';
+import {LogoutComponent} from '../../logout/logout.component';
 
 
 export const AdminLayoutRoutes: Routes = [
@@ -67,6 +69,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'notifications',  component: NotificationsComponent },
     { path: 'upgrade',        component: UpgradeComponent },
     { path: 'login',          component: LoginComponent},
+    { path: 'logout',         component: LogoutComponent},
     { path: 'register',       component: RegisterComponent},
     { path: 'products',       component: ProductsComponent},
     { path: 'home',           component: HomeComponent}

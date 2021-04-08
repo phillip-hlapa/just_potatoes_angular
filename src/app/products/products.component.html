@@ -1,14 +1,16 @@
 <br />
 <br />
-<table class="table" *ngFor="let product of Products">
-  <tr>
+<div class="container">
+<div class="col">
+<table class="table" >
+  <tr *ngFor="let product of Products">
     <td>
-      <div class="card mb-3" style="max-width: 700px;">
+      <div class="card mb-2" style="max-width: 600px;">
         <div class="row g-0">
-          <div class="col-md-5">
+          <div class="col-md-3">
             <table>
               <tr>
-                <td><img src="./assets/img/products/sample.jpg" alt="..." width="380" height="350"></td>
+                <td><img src="./assets/img/products/sample.jpg" alt="..." width="300" height="300"></td>
                 <td><h2><b>R{{product.product_price}}</b></h2></td>
               </tr>
             </table>
@@ -17,45 +19,45 @@
             <div class="card-body">
               <h5 class="card-title">{{product.product_name}}</h5>
               <p class="card-text">{{product.product_description}}</p>
-              <p class="card-text" (click)="add_product(product._id)"><button type="button" name="button" class="btn btn-success">add</button></p>
+              <p class="card-text" (click)="add_product(product._id)"><button type="button" name="button" class="btn btn-success" [disabled]="!canOrder">add</button></p>
             </div>
           </div>
         </div>
       </div>
     </td>
-    <td *ngIf="isThereOrder">
-      <table class="table-striped">
-        <th>Product</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th>Remove Product</th>
-        <tr *ngFor="let order of OrderedProducts">
-          <td><b>{{order.product_name}}</b></td>
-          <td><b>{{order.product_price}}</b></td>
-          <td>
-            <select id="quantity" (click)="quantityTotalCalculate(order._id)" class="form-control" name="quantity" [(ngModel)]="quantity" id="quantity">
-              <option value="1" selected>1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="4">5</option>
-              <option value="4">6</option>
-              <option value="4">7</option>
-            </select>
-          </td>
-          <td>
-            <button class="btn btn-danger" (click)="deleteProdFromOrder(order._id)">remove</button>
-          </td>
-        </tr>
-        <tr>
-          <td><b><h4>Total</h4></b></td>
-          <td><b>{{OrderTotal}}</b></td>
-          <br />
-        </tr>
-        <tr>
-          <button class="btn btn-success" *ngIf="submitButtonAvailable" (click)="onSubmitOrder()">submit order</button>
-        </tr>
-      </table>
-    </td>
     </tr>
 </table>
+<table *ngIf="isThereOrder" class="table-striped">
+  <th>Product</th>
+  <th>Price</th>
+  <th>Quantity</th>
+  <th>Remove Product</th>
+  <tr *ngFor="let order of OrderedProducts">
+    <td><b>{{order.product_name}}</b></td>
+    <td><b>{{order.product_price}}</b></td>
+    <td>
+      <select id="quantity" (click)="quantityTotalCalculate(order._id)" class="form-control" name="quantity" [(ngModel)]="quantity" id="quantity">
+        <option value="1" selected>1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="4">5</option>
+        <option value="4">6</option>
+        <option value="4">7</option>
+      </select>
+    </td>
+    <td>
+      <button class="btn btn-danger" (click)="deleteProdFromOrder(order._id)">remove</button>
+    </td>
+  </tr>
+  <tr>
+    <td><b><h4>Total</h4></b></td>
+    <td><b>{{OrderTotal}}</b></td>
+    <br />
+  </tr>
+  <tr>
+    <button class="btn btn-success" *ngIf="submitButtonAvailable" (click)="onSubmitOrder()">submit order</button>
+  </tr>
+</table>
+</div>
+</div>

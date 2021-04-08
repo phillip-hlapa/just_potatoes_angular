@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {UsersService} from "../../../services/users/users.service";
+import {UsersService} from '../../../services/users/users.service';
 
 declare const $: any;
 declare interface RouteInfo {
@@ -11,16 +11,15 @@ declare interface RouteInfo {
 export const ROUTES: RouteInfo[] = [
     { path: '/home', title: 'Home',  icon: 'home',  class: '' },
     { path: '/dashboard', title: 'Dashboard',  icon: 'dashboard', class: '' },
-    { path: '/user-profile', title: 'User Profile',  icon:'person', class: '' },
-    { path: '/view-my-orders', title: 'View My Orders',  icon:'content_paste', class: '' },
-    { path: '/manage-orders', title: 'Manage Orders',  icon:'unarchive', class: 'active-pro'},
-    { path: '/contact-admin', title: 'Contact Admin',  icon:'library_books', class: '' },
-    { path: '/notifications', title: 'Notifications',  icon:'notifications', class: '' },
-    { path: '/register', title: 'Register',  icon:'account_box', class: '' },
-    { path: '/products', title: 'Products',  icon:'add_shopping_cart', class: '' },
-    { path: '/create-order', title: 'Create Order',  icon:'local_shipping', class: '' },
-    { path: '/login', title: 'Login',  icon:'login', class: ''},
-    { path: '/logout', title: 'Logout',  icon:'logout', class: ''},
+    { path: '/user-profile', title: 'User Profile',  icon: 'person', class: '' },
+    { path: '/view-my-orders', title: 'View My Orders',  icon: 'content_paste', class: '' },
+    { path: '/manage-orders', title: 'Manage Orders',  icon: 'unarchive', class: 'active-pro'},
+    { path: '/contact-admin', title: 'Contact Admin',  icon: 'library_books', class: '' },
+    { path: '/notifications', title: 'Notifications',  icon: 'notifications', class: '' },
+    { path: '/products', title: 'Products',  icon: 'add_shopping_cart', class: '' },
+    { path: '/create-order', title: 'Create Order',  icon: 'local_shipping', class: '' },
+    { path: '/login', title: 'Login',  icon: 'login', class: ''},
+    { path: '/logout', title: 'Logout',  icon: 'logout', class: ''},
 ];
 
 @Component({
@@ -31,11 +30,12 @@ export const ROUTES: RouteInfo[] = [
 export class SidebarComponent implements OnInit {
   menuItems: any[];
   authenticated = false;
-  constructor(private userService: UsersService) { }
+  constructor(public userService: UsersService) { }
 
   ngOnInit() {
-      this.authenticated = this.userService.isAuthenticated();
-    this.menuItems = ROUTES.filter(menuItem => menuItem);
+      this.userService.verifyAuth();
+      this.userService.verifyUserRole();
+      this.menuItems = ROUTES.filter(menuItem => menuItem);
   }
   isMobileMenu() {
       if ($(window).width() > 991) {

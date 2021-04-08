@@ -10,8 +10,20 @@
     </nav>
 </header>
 
+<div class="container" align="center" *ngIf="isLoading">
+    <mat-spinner color="warn" ></mat-spinner>
+    <br><br>
+    <!-- For Demo Purpose -->
+    <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
+        <img src="./assets/img/jus_potatoes.svg" alt="" class="img-fluid mb-3 d-none d-md-block">
+        <h1>Registering you! one moment</h1>
+        <p class="font-italic text-muted mb-0">Jus'potatoes, we are potatoes</p>
 
-<div class="container">
+    </div>
+
+</div>
+
+<div class="container" *ngIf="!isLoading">
     <div class="row py-5 mt-4 align-items-center">
         <!-- For Demo Purpose -->
         <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
@@ -24,7 +36,7 @@
 
         <!-- Registeration Form -->
         <div class="col-md-7 col-lg-6 ml-auto" *ngIf="!isRegister">
-            <form action="#">
+            <form #f="ngForm" [mustMatch]="['password1', 'confirmPassword1']">
                 <div class="row">
 
                     <!-- First Name -->
@@ -34,9 +46,9 @@
                                 <i class="fa fa-user text-muted"></i>
                             </span>
                         </div>
-                        <input id="firstName" type="text" name="username" id="username" [(ngModel)]="username" placeholder="Username" class="form-control bg-white border-left-0 border-md">
+                        <input id="username" #username1="ngModel" minlength="5" type="text" name="username" id="username" [(ngModel)]="username" placeholder="Username" class="form-control bg-white border-left-0 border-md">
                     </div>
-
+                    <div *ngIf="username1.invalid && (username1.dirty || username1.touched)" class="alert alert-danger" role="alert"><p>Username is required, Min length 5</p></div>
                     <!-- Last Name -->
                     <div class="input-group col-lg-12 mb-4">
                         <div class="input-group-prepend">
@@ -44,7 +56,8 @@
                                 <i class="fa fa-user text-muted"></i>
                             </span>
                         </div>
-                        <input id="lastName" type="text" name="street_name" id="street_name" [(ngModel)]="street_name" placeholder="Street Name" class="form-control bg-white border-left-0 border-md">
+                        <input id="street_name" #street_name1="ngModel" required type="text" name="street_name" id="street_name" [(ngModel)]="street_name" placeholder="Street Name" class="form-control bg-white border-left-0 border-md">
+                        <div *ngIf="street_name1.invalid && (street_name1.dirty || street_name1.touched)" class="alert alert-danger" role="alert"><p>street name required</p></div>
                     </div>
                     <div class="input-group col-lg-12 mb-4">
                         <div class="input-group-prepend">
@@ -62,7 +75,8 @@
                                 <i class="fa fa-envelope text-muted"></i>
                             </span>
                         </div>
-                        <input id="email" type="email" name="email" id="email" [(ngModel)]="email" placeholder="Email Address" class="form-control bg-white border-left-0 border-md">
+                        <input id="email"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" type="text" #email1="ngModel" required name="email" id="email" [(ngModel)]="email" placeholder="Email Address" class="form-control bg-white border-left-0 border-md">
+                        <p *ngIf="email1.invalid && (email1.dirty || email1.touched || email1.errors?.pattern)" class="alert alert-danger" role="alert"><span>the correct email is required</span></p>
                     </div>
 
                     <!-- Phone Number -->
@@ -72,26 +86,13 @@
                                 <i class="fa fa-phone-square text-muted"></i>
                             </span>
                         </div>
-                        <input ame="cell_number" id="cell_number" type="tel" [(ngModel)]="cell_number" name="cell_number" placeholder="Phone Number" class="form-control bg-white border-md border-left-0 pl-3">
+                        <input name="cell_number" minlength="10" maxlength="10" #cell_number1='ngModel' pattern="[0-9]+" id="cell_number" type="tel" numeric [(ngModel)]="cell_number" name="cell_number" placeholder="Phone Number" class="form-control bg-white border-md border-left-0 pl-3">
+                        <p *ngIf="cell_number1.invalid && (cell_number1.dirty || cell_number1.touched || cell_number1.errors?.pattern)" class="alert alert-danger" role="alert"><span>the correct number of length 10 is required</span></p>
+
                     </div>.
 
 
                     <!-- Job -->
-                    <div class="input-group col-lg-12 mb-4">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text bg-white px-4 border-md border-right-0">
-                                <i class="fa fa-black-tie text-muted"></i>
-                            </span>
-                        </div>
-                        <select id="job" name="zone" id="zone" [(ngModel)]="zone" class="form-control custom-select bg-white border-left-0 border-md">
-                            <option value="ZONE 1">ZONE 1</option>
-                            <option value="ZONE 2">ZONE 2</option>
-                            <option value="ZONE 3">ZONE 3</option>
-                            <option value="ZONE 4">ZONE 4</option>
-                            <option value="ZONE 5">ZONE 5</option>
-                            <option value="NONE">NONE</option>
-                        </select>
-                    </div>
 
                     <!-- Password -->
                     <div class="input-group col-lg-6 mb-4">
@@ -100,7 +101,7 @@
                                 <i class="fa fa-lock text-muted"></i>
                             </span>
                         </div>
-                        <input id="password" type="password" name="password" placeholder="Password" id="password" [(ngModel)]="password" class="form-control bg-white border-left-0 border-md">
+                        <input id="password" type="password" name="password" #password1='ngModel' placeholder="Password" id="password" [(ngModel)]="password" class="form-control bg-white border-left-0 border-md">
                     </div>
 
                     <!-- Password Confirmation -->
@@ -110,14 +111,14 @@
                                 <i class="fa fa-lock text-muted"></i>
                             </span>
                         </div>
-                        <input id="passwordConfirmation" type="password" name="passwordConfirmation"  id="passwordConfirmation" [(ngModel)]="passwordConfirmation" placeholder="Confirm Password" class="form-control bg-white border-left-0 border-md">
+                        <input id="passwordConfirmation" type="password" #confirmPassword1='ngModel' name="passwordConfirmation"  id="passwordConfirmation" [(ngModel)]="passwordConfirmation" placeholder="Confirm Password" class="form-control bg-white border-left-0 border-md">
                     </div>
 
                     <!-- Submit Button -->
                     <div class="form-group col-lg-12 mx-auto mb-0">
-                        <a (click)="register()" class="btn btn-warning btn-block py-2">
+                        <button (click)="register()" [disabled]="!f.valid" class="btn btn-warning btn-block py-2">
                             <span class="font-weight-bold">Create your account</span>
-                        </a>
+                        </button>
                     </div>
 
                     <!-- Divider Text -->
