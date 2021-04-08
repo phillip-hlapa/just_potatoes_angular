@@ -6,8 +6,8 @@
   <br><br>
   <!-- For Demo Purpose -->
   <div class="col-md-2">
-    <img src="./assets/img/firebog-garden-sign-crop-01a-g1.svg" alt="" class="img-fluid mb-3 d-none d-md-block">
-    <h6>One Second while we place your order</h6>
+    <img src="./assets/img/firebog-garden-sign-crop-01a-g1.svg" alt="" class="img-fluid">
+    <h6>one second while we place your order...</h6>
     <p class="font-italic text-muted mb-0">Jus'potatoes, we are potatoes</p>
   </div>
 </div>
@@ -15,7 +15,7 @@
 <div class="container" align="center" *ngIf="!isLoading && !submitButtonAvailable">
   <!-- For Demo Purpose -->
   <div class="col-md-2">
-    <img src="./assets/img/dwcheckyes.svg" alt="" class="img-fluid mb-3 d-none d-md-block">
+    <img src="./assets/img/dwcheckyes.svg" alt="" class="img-fluid">
     <h6>DONE! please find the slip sent to your email</h6>
     <br>
     <button class="btn btn-success" (click)="goHome()">go home</button>
@@ -34,14 +34,14 @@
           <div class="col-md-3">
             <table>
               <tr>
-                <td><img src="./assets/img/products/sample.jpg" alt="..." width="300" height="300"></td>
-                <td><h2><b>R{{product.product_price}}</b></h2></td>
+                <td><img src="./assets/img/products/sample.jpg" alt="..." class="img-fluid"></td>
               </tr>
             </table>
           </div>
           <div class="col-md-10">
             <div class="card-body">
-              <h5 class="card-title">{{product.product_name}}</h5>
+              <h2><b>R{{product.product_price}}</b></h2>
+              <h5 class="card-title"><b>{{product.product_name}}</b></h5>
               <p class="card-text">{{product.product_description}}</p>
               <p class="card-text" (click)="add_product(product._id)"><button type="button" name="button" class="btn btn-success" [disabled]="!canOrder">add</button></p>
             </div>
