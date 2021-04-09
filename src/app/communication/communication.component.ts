@@ -19,6 +19,7 @@ export class CommunicationComponent implements OnInit {
 
    // spinnners
   isLoading: boolean = false;
+  isAdmin: boolean = false;
   constructor(private messagesService: MessagesService, private userService: UsersService) { }
 
   ngOnInit(): void {
@@ -26,6 +27,7 @@ export class CommunicationComponent implements OnInit {
     this.message = '';
     this.reply = '';
     this.getMessages();
+    this.isAdmin = this.userService.verifyUserRole()
   }
 
   createMessage() {
