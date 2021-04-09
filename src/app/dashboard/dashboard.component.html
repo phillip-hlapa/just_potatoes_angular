@@ -154,8 +154,6 @@
                                   <td><button type="button" name="button" [disabled]="!userIsAdmin" (click)="reverseOrder(order._id)"  *ngIf="order.order_status === 'DECLINED'" class="btn btn-outline-warning btn-sm">reverse</button></td>
                                   <td><label>{{order.order_status}}</label>
                               </tr>
-
-
                           </tbody>
                       </table>
                   </div>
@@ -185,6 +183,7 @@
                             <tbody>
                                 <tr *ngFor="let user of Users">
                                     <td *ngIf="user.address.city">{{user.address.city}}</td>
+                                    <td *ngIf="!user.address.city">JOHANNESBURG</td>
                                     <td>{{user.username}}</td>
                                     <td>{{user.contact.email}}</td>
                                     <td>{{user.address.street_name}}</td>
