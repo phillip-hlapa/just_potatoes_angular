@@ -15,6 +15,7 @@ import { HomeComponent } from '../../home/home.component';
 import {AuthGuardService} from '../../../services/guards/auth-guard.service';
 import {SidebarComponent} from '../../components/sidebar/sidebar.component';
 import {LogoutComponent} from '../../logout/logout.component';
+import {CommunicationComponent} from '../../communication/communication.component';
 
 
 export const AdminLayoutRoutes: Routes = [
@@ -72,5 +73,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'logout',         component: LogoutComponent},
     { path: 'register',       component: RegisterComponent},
     { path: 'products',       component: ProductsComponent},
-    { path: 'home',           component: HomeComponent}
+    { path: 'home',           component: HomeComponent},
+    { path: 'contact-admin',  component: CommunicationComponent}
 ];

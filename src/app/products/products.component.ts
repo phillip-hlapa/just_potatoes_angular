@@ -85,12 +85,29 @@ export class ProductsComponent implements OnInit {
             myProduct = product;
             console.log(this.quantity)
             if (this.quantity >= 1) {
-                if(this.quantity > this.previousQuantity) {
+                if (this.quantity > this.previousQuantity) {
                     this.previousQuantity = this.quantity;
                     this.OrderTotal = this.OrderTotal + (parseInt(myProduct.product_price) * this.quantity)
                 } else {
                     this.previousQuantity = this.quantity;
                     this.OrderTotal = this.OrderTotal - (parseInt(myProduct.product_price) * this.quantity)
+                }
+            }
+
+        })
+    }
+    private quantityTotalCalculate2(product_id: any, q) {
+        let myProduct: any;
+        this.productService.getProduct(product_id).subscribe(product => {
+            myProduct = product;
+            console.log(this.quantity)
+            if (q >= 1) {
+                if (this.quantity > this.previousQuantity) {
+                    this.previousQuantity = q;
+                    this.OrderTotal = this.OrderTotal + (parseInt(myProduct.product_price) * q)
+                } else {
+                    this.previousQuantity = q;
+                    this.OrderTotal = this.OrderTotal - (parseInt(myProduct.product_price) * q)
                 }
             }
 
@@ -102,7 +119,6 @@ export class ProductsComponent implements OnInit {
     }
 
     private onSubmitOrder() {
-      console.log("hao !!!!!!")
       this.isLoading = true;
         const orderDetails = {
             order_total: this.OrderTotal,
@@ -119,5 +135,18 @@ export class ProductsComponent implements OnInit {
 
    private goHome() {
         this.router.navigateByUrl('home').then(homeUrl => {})
+    }
+
+    onChangeQuantity(value: any, _id: any) {
+      console.log(_id)
+      for (let i = 0; i < this.Order.length; i++) {
+          console.log(i)
+          if (this.Order[i] === _id) {
+              this.quantityTotalCalculate2(this.Order[i], value);
+              console.log(this.OrderTotal)
+          } else {
+              console.log('nothing')
+          }
+      }
     }
 }

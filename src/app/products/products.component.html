@@ -55,28 +55,32 @@
   <th>Product</th>
   <th>Price</th>
   <th>Quantity</th>
-  <th>Remove Product</th>
+  <th>Remove</th>
   <tr *ngFor="let order of OrderedProducts">
     <td><b>{{order.product_name}}</b></td>
-    <td><b>{{order.product_price}}</b></td>
+    <td><b>R{{order.product_price}}</b></td>
     <td>
-      <select id="quantity" (click)="quantityTotalCalculate(order._id)" class="form-control" name="quantity" [(ngModel)]="quantity" id="quantity">
-        <option value="1" selected>1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="4">5</option>
-        <option value="4">6</option>
-        <option value="4">7</option>
-      </select>
+      <div class="input-group plus-minus-input">
+        <div class="input-group-button">
+          <button type="button" class="button hollow circle" data-quantity="minus" >
+            <i class="fa fa-minus" aria-hidden="true"></i>
+          </button>
+        </div>
+        <input class="input-group-field" type="number" name="quantity" value="0" (input)="onChangeQuantity($event.target.value, order._id)">
+        <div class="input-group-button">
+          <button type="button" class="button hollow circle" data-quantity="plus" >
+            <i class="fa fa-plus" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
     </td>
     <td>
-      <button class="btn btn-danger" (click)="deleteProdFromOrder(order._id)">remove</button>
+      <button class="btn btn-outline-danger btn-sm" (click)="deleteProdFromOrder(order._id)">del</button>
     </td>
   </tr>
   <tr>
     <td><b><h4>Total</h4></b></td>
-    <td><b>{{OrderTotal}}</b></td>
+    <td><b>R{{OrderTotal}}</b></td>
     <br />
   </tr>
   <tr>

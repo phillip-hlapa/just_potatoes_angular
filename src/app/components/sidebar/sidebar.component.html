@@ -79,9 +79,15 @@
             </a>
         </li>
         <li routerLinkActive="active"  class="nav-item">
-            <a class="nav-link" [routerLink]="['/contact-admin']" *ngIf="userService.verifyAuth()">
+            <a class="nav-link" [routerLink]="['/contact-admin']" *ngIf="userService.verifyAuth() && !userService.verifyUserRole()">
                 <i class="material-icons">library_books</i>
                 <p>Contact Admin</p>
+            </a>
+        </li>
+        <li routerLinkActive="active"  class="nav-item">
+            <a class="nav-link" [routerLink]="['/contact-admin']" *ngIf="userService.verifyAuth() && userService.verifyUserRole()">
+                <i class="material-icons">library_books</i>
+                <p>Notifications</p>
             </a>
         </li>
 <!--        <li routerLinkActive="active"  class="nav-item">-->

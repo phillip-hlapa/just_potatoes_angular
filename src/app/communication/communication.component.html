@@ -1,0 +1,81 @@
+<div class="container" align="center" *ngIf="isLoading">
+    <mat-spinner color="warn" ></mat-spinner>
+    <br><br>
+    <!-- For Demo Purpose -->
+    <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
+        <img src="./assets/img/mail-message-new.svg" alt="" class="img-fluid mb-3 d-none d-md-block">
+        <h1>Sending reply, one sec...</h1>
+
+    </div>
+
+</div>
+
+
+
+<div class="main-content" *ngIf="!isLoading">
+<div class="container container-fluid" align="center">
+<div class="row">
+    <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
+        <img src="./assets/img/Minduka_Notebook.svg" alt="" class="img-fluid">
+    </div>
+    <br>
+
+        <div class="col-md-8 container-fluid">
+            <div  *ngFor="let message of Messages" >
+            <mat-accordion>
+                <mat-expansion-panel hideToggle>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            FROM: {{message.sender.username}} &nbsp; &nbsp; Date: {{message.dateCreated}}
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            {{message.messageHeader}}
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <p>{{message.message}}</p>
+                    <hr>
+                    <div *ngFor="let text of message.textMessages">
+                        <p>From: {{text.replyFrom}} &nbsp; &nbsp; {{text.text}}</p>
+                    </div>
+                    <div  *ngIf="isReply">
+                        <form  #f="ngForm">
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea #replyInf class="form-control" id="{{message._id}}" rows="3" name="reply" ></textarea>
+                            </div>
+                            <div align="centre">
+                                <button *ngIf="isReply" (click)="replyMessage(message._id, replyInf.value)" class="btn btn-outline-primary btn-sm">send reply</button>
+                            </div>
+                        </form>
+                    </div>
+                    <button *ngIf="!isReply" (click)="isReplyMessage()" class="btn btn-outline-primary btn-sm">Reply</button>
+
+
+                </mat-expansion-panel>
+            </mat-accordion>
+                <br>
+            </div>
+        </div>
+        <br>
+
+
+    <br>
+    <div class="col-md-4 container-fluid">
+        <form class="table">
+            <div class="form-group">
+                <label for="message_header">Message Header</label>
+                <input type="text" class="form-control" id="message_header" name="message_header" [(ngModel)]="message_header" placeholder="Compliments...">
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea class="form-control" id="message" rows="3" name="message" [(ngModel)]="message"></textarea>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-outline-primary" (click)="createMessage()">send</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+</div>
+</div>

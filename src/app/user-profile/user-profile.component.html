@@ -12,80 +12,66 @@
                           <div class="row">
                               <div class="col-md-12">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="ROLE (disabled): {{User.role}}" disabled>
+                                    <input matInput placeholder="ROLE (disabled): " value="{{User.role}}" disabled>
                                   </mat-form-field>
                               </div>
                               <div class="col-md-12">
                                   <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="USERNAME: {{User.username}}">
+                                    <input matInput placeholder="USERNAME:" [(ngModel)]="User.username" name="User.username" value="{{User.username}}" [disabled]="changeDetails1" >
                                   </mat-form-field>
                               </div>
                               <div class="col-md-12">
                                   <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="EMAIL: {{User.contact.email}}" type="email">
+                                    <input matInput placeholder="EMAIL:" [(ngModel)]="User.contact.email" name="User.contact.email" value="{{User.contact.email}}" type="email" disabled>
                                   </mat-form-field>
                               </div>
                           </div>
                           <div class="row">
                               <div class="col-md-12">
                                 <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="DATE CREATED: " type="text">
+                                  <input matInput placeholder="DATE CREATED: " value="2021-01-01"type="text" disabled>
                                 </mat-form-field>
                               </div>
-                              <div class="col-md-12">
+                              <div class="col-md-12" [hidden]="!changeDetails1">
                                 <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="PASSWORD: {{User.password}}"  type="text">
+                                  <input matInput placeholder="PASSWORD: " value="**Hidden**" type="text"  [disabled]="changeDetails1">
                                 </mat-form-field>
                               </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-md-12">
-                                <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="ADDRESS: {{User.address.street_name}} {{User.address.house_number}} {{User.address.zone}}"  type="text" disabled>
-                                </mat-form-field>
-                                <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="STREET NAME:  {{User.address.street_name}}" type="text">
-                                </mat-form-field>
+                              <div class="col-md-12" [hidden]="changeDetails1">
+                                  <mat-form-field class="example-full-width">
+                                      <input matInput placeholder="ENTER NEW PASSWORD OR LEAVE BLANK: " type="text" [(ngModel)]="updated_password" name="updated_password">
+                                  </mat-form-field>
                               </div>
                           </div>
                           <div class="row">
                               <div class="col-md-12">
                                 <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="CITY: JOHANNESBURG" type="text">
+                                  <input matInput placeholder="ADDRESS:" value="{{User.address.street_name}} {{User.address.house_number}} {{User.address.zone}} - {{User.address.city}}"  type="text" disabled>
                                 </mat-form-field>
-                              </div>
-                              <div class="col-md-12">
                                 <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="POSTAL CODE: 2000" type="text">
-                                </mat-form-field>
-                              </div>
-                              <div class="col-md-12">
-                                <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="HOUSE/COMPANY NO. : {{User.address.house_number}}" type="text">
-                                </mat-form-field>
-                              </div>
-                              <div class="col-md-12">
-                                <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="ZONE {{User.address.zone}}" type="text">
+                                  <input matInput placeholder="STREET NAME:" [(ngModel)]="User.address.street_name"  name="User.address.street_name" value="{{User.address.street_name}}" type="text" [disabled]="changeDetails1">
                                 </mat-form-field>
                               </div>
                           </div>
                           <div class="row">
-                              <div class="col-md-12">
-                                <label>About Me</label>
+                              <div class="col-md-12" *ngIf="User.address.city">
                                 <mat-form-field class="example-full-width">
-                                   <textarea matInput placeholder="Nothing special here"></textarea>
-                                 </mat-form-field>
-                                  <!-- <div class="form-group">
-
-                                      <div class="form-group">
-                                          <label class="bmd-label-floating"> Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</label>
-                                          <textarea class="form-control" rows="5"></textarea>
-                                      </div>
-                                  </div> -->
+                                  <input matInput placeholder="CITY:" [(ngModel)]="User.address.city" name="User.address.city" value="{{User.address.city}}" type="text" [disabled]="changeDetails1">
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-12">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput type="tel" maxlength='10' placeholder="CELL NUMBER:" [(ngModel)]="User.contact.cell_number" name="User.contact.cell_number" value="{{User.contact.cell_number}}" [disabled]="changeDetails1">
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-12">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="HOUSE/COMPANY NO. :" [(ngModel)]="User.address.house_number" name="User.address.house_number" value="{{User.address.house_number}}" type="text" [disabled]="changeDetails1">
+                                </mat-form-field>
                               </div>
                           </div>
-                          <button mat-raised-button type="submit" class="btn btn-danger pull-right">Update Profile</button>
+                          <button mat-raised-button type="button" (click)="changeDetails()" class="btn btn-danger pull-right" [hidden]="!changeDetails1">Change</button>
+                          <button mat-raised-button type="button" (click)="changeDetailsDone(User._id)"class="btn btn-danger pull-right" [hidden]="changeDetails1">Done</button>
                           <div class="clearfix"></div>
                       </form>
                   </div>

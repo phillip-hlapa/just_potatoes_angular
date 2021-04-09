@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {UsersService} from "../../services/users/users.service";
+import {UsersService} from '../../services/users/users.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import {response} from "express";
+import {response} from 'express';
 
 @Component({
   selector: 'app-register',
@@ -19,7 +19,7 @@ export class RegisterComponent implements OnInit {
   street_name;
   house_number;
   cell_number;
-  zone;
+  city: String = 'JOHANNESBURG';
 
   //user object
   User: any;
@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit {
     if (this.password !== this.passwordConfirmation) {
       console.log('not valid 1')
         this.formIsValid = false;
-    } else if (!this.password || !this.passwordConfirmation || !this.username|| !this.street_name || !this.cell_number || !this.email || !this.house_number) {
+    } else if (!this.password || !this.passwordConfirmation || !this.username || !this.street_name || !this.cell_number || !this.email || !this.house_number) {
       console.log('not valid 2')
       this.formIsValid = false;
     } else {
@@ -53,7 +53,7 @@ export class RegisterComponent implements OnInit {
         email: this.email,
         cell_number: this.cell_number,
         house_number: this.house_number,
-        zone: this.zone
+        city: this.city
       }
 
       this.userService.createNewUser(this.User).subscribe(createdUser => {
@@ -77,15 +77,15 @@ export class RegisterComponent implements OnInit {
 
   verifyOTP() {
     let otp_response: any;
-    let verifyOtp = {
-      userid: localStorage.getItem("userId"),
+    const verifyOtp = {
+      userid: localStorage.getItem('userId'),
       otp: this.optValue
 
     }
     console.log(verifyOtp)
       this.userService.verifyViaOTP(verifyOtp).subscribe(response => {
         otp_response = response;
-        if(otp_response.message === "USER VALIDATED USING OTP") {
+        if (otp_response.message === 'USER VALIDATED USING OTP') {
           this.router.navigateByUrl('home').then(r => {});
         } else {
           this.userValidationError = true;
