@@ -8,12 +8,18 @@ import {UsersService} from "../../services/users/users.service";
 })
 export class VieworedersComponent implements OnInit {
   UserOrders: any;
+  thereIsOrder: boolean = true;
 
   constructor(private usersService: UsersService) { }
 
   ngOnInit(): void {
     this.usersService.getUserOrders(localStorage.getItem('userId')).subscribe(orders => {
       this.UserOrders = orders;
+      if(!this.UserOrders || this.UserOrders.length == 0) {
+        this.thereIsOrder = false;
+      } else {
+        this.thereIsOrder = true;
+      }
     })
   }
 
