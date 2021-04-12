@@ -9,8 +9,10 @@ export class UsersService {
 
   // endpoint_url = "http://192.168.39.233"
   // endpoint_url = 'https://damp-sands-73285.herokuapp.com'
-  // endpoint_url = 'http://localhost:1993'
-     endpoint_url = 'https://cherry-cobbler-84144.herokuapp.com';
+   //endpoint_url = 'http://localhost:1993'
+  //   endpoint_url = 'https://cherry-cobbler-84144.herokuapp.com';
+    endpoint_url = 'https://rocky-brook-00154.herokuapp.com';
+
   constructor(private httpClient: HttpClient) { }
 
   // get all users
@@ -51,7 +53,11 @@ export class UsersService {
       return this.httpClient.post(this.endpoint_url + '/api/users/validate', optValue);
 
     }
-
+   public updateUser(User: any, userId: string): Observable<Object> {
+       console.log(User)
+       console.log(userId)
+       return this.httpClient.post(this.endpoint_url + '/api-v2/users/update/'+ userId, User);
+   }
     public verifyAuth(): boolean {
       const auth = localStorage.getItem('userId')
         if (auth) {
@@ -69,4 +75,7 @@ export class UsersService {
         }
     }
 
+    public getUserOrders(userId): Observable<Object> {
+        return this.httpClient.get(this.endpoint_url + '/api/orders/user/' + userId)
+    }
 }

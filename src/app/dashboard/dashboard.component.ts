@@ -21,8 +21,13 @@ UserRoleCount = 0;
 Orders: any;
 OrderByUser: any = null;
 
+
+
 //
 revenue = 0;
+
+//spinner
+isLoading: boolean = false;
 
   // deleting users
     acceptedOrder = false;
@@ -85,6 +90,7 @@ revenue = 0;
 
       seq2 = 0;
   }  ngOnInit() {
+
       /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
 
 
@@ -184,6 +190,7 @@ revenue = 0;
 
       // get user role
       this.getUserRole();
+      this.isLoading = false;
 
   }
   onDelete(userId) {
@@ -224,6 +231,7 @@ revenue = 0;
     }
 
     acceptOrder(_id: any) {
+      this.isLoading = true;
         this.productService.acceptOrder(_id).subscribe(acceptedOrder => {
             console.log(acceptedOrder);
             if (acceptedOrder) {
@@ -235,18 +243,22 @@ revenue = 0;
 
     // order management
     declineOrder(_id: any) {
+        this.isLoading = true;
         this.productService.declineOrder(_id).subscribe(declinedOrder => {console.log(declinedOrder); this.ngOnInit(); })
     }
     dispatchOrder(_id: any) {
+        this.isLoading = true;
         this.productService.dispatchOrder(_id).subscribe(dispatchOrder => {console.log(dispatchOrder); this.ngOnInit(); })
     }
 
     reverseOrder(_id: any) {
+        this.isLoading = true;
         this.productService.reverseOrder(_id).subscribe(reverseOrder => {console.log(reverseOrder); this.ngOnInit(); })
     }
 
 
     getUserOrder(orderId: any) {
+
         this.productService.getOrderById(orderId).subscribe(userOrderResponse => {
             this.OrderByUser = userOrderResponse;
             console.log(this.OrderByUser)
@@ -255,6 +267,7 @@ revenue = 0;
         })
     }
     // revenue calculation
+
     calculateRevenue(orders: any) {
       orders.forEach(order => {
           this.revenue = this.revenue + order.order_total;

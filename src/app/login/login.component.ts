@@ -35,16 +35,14 @@ export class LoginComponent implements OnInit {
       console.log(response)
       this.UserLoginResponse = response;
       if (response) {
-        localStorage.setItem('userId', this.UserLoginResponse.userId);
-        localStorage.setItem('userRole', this.UserLoginResponse.role);
-        console.log(localStorage.getItem('userId'))
-        console.log(this.UserLoginResponse.message)
         this.isLoading = false;
         if (this.UserLoginResponse.message != null && this.UserLoginResponse.message === 'NOT FOUND') {
           this.errorLogin = 'you will need to register!';
         } else if (this.UserLoginResponse.role !== 'ADMIN') {
+          this.setVariables(this.UserLoginResponse);
           this.router.navigateByUrl('home').then(r => {});
         } else if (this.UserLoginResponse.role === 'ADMIN') {
+           this.setVariables(this.UserLoginResponse);
            this.router.navigateByUrl('dashboard').then(r => {});
         }
 
@@ -53,6 +51,10 @@ export class LoginComponent implements OnInit {
     }, error => {
       console.log(error)
     })
+  }
+  private setVariables(User: any) {
+    localStorage.setItem('userId', User.userId);
+    localStorage.setItem('userRole', User.role);
   }
 
 }

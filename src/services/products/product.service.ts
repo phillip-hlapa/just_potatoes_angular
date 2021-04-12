@@ -10,8 +10,8 @@ export class ProductService {
 
   // endpoint_url = "http://192.168.39.233"
   // endpoint_url = 'https://damp-sands-73285.herokuapp.com'
-     endpoint_url = 'https://cherry-cobbler-84144.herokuapp.com';
-  // endpoint_url = 'http://localhost:1993'
+  //   endpoint_url = 'https://cherry-cobbler-84144.herokuapp.com';
+  endpoint_url = 'https://rocky-brook-00154.herokuapp.com';
 
   constructor(private httpClient: HttpClient) { }
 

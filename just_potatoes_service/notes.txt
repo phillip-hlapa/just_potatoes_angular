@@ -1,2 +1,0 @@
-zip app.zip -r * .[^.]* -x *.git* *.env*
-//need the above to zip the file and deploy to amazon ws

@@ -18,6 +18,7 @@ export class UserProfileComponent implements OnInit {
   updated_house_number: any;
   updated_cell_number: any;
 
+  updatedUser: boolean = false;
   constructor(private usersService: UsersService) { }
 
   ngOnInit() {
@@ -38,6 +39,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   changeDetailsDone(_id: any) {
+    console.log('should happen')
     this.changeDetails1 = true;
     // const updateUser = {
     //   username: this.updated_username,
@@ -54,7 +56,13 @@ export class UserProfileComponent implements OnInit {
     if (this.updated_password) {
       this.User.password = this.updated_password;
     }
-    console.log(this.User);
-    this.ngOnInit();
+    this.usersService.updateUser(this.User, localStorage.getItem('userId')).subscribe(response => {
+      console.log('helping')
+      if(response) {
+        this.User = response;
+        this.updatedUser = true;
+      }
+    })
+
   }
 }

@@ -32,6 +32,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { CommunicationComponent } from './communication/communication.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { VieworedersComponent } from './vieworeders/vieworeders.component';
 
 @NgModule({
   imports: [
@@ -58,6 +59,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     HomeComponent,
     LogoutComponent,
     CommunicationComponent,
+    VieworedersComponent,
 
   ],
   providers: [],
