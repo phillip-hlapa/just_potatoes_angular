@@ -3,5 +3,9 @@
 https://freesvg.org/potatoes-vector-clip-art
 src="https://freesvg.org/img/johnny_automatic_potatoes.png"
 
+//use the dimensions of this image
+https://res.cloudinary.com/mhmd/image/upload/v1556485076/shoes-1_gthops.jpg
+width 650 * height 400
+
 build app
 ng build --prod --output-path docs --base-href '#'

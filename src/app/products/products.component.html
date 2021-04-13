@@ -69,12 +69,12 @@
             <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
             <li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>
           </ul>
-          <button type="button"  (click)="add_product(product._id)" name="button" mat-raised-button color="accent" [disabled]="!canOrder">add</button>
+          <button type="button"  (click)="add_product(product._id)" name="button" mat-raised-button color="accent" [disabled]="!canOrder">ADD</button>
         </div>
       </div>
     </div>
   </div>
-<table *ngIf="isThereOrder" class="table-striped">
+<table *ngIf="isThereOrder" class="table">
   <th>Product</th>
   <th>Price</th>
   <th>Remove</th>
@@ -82,7 +82,7 @@
     <td><b>{{order.product_name}}</b></td>
     <td><b>R{{order.product_price}}</b></td>
     <td>
-      <button cmat-raised-button color="warn" (click)="deleteProdFromOrder(order._id)">del</button>
+      <button mat-stroked-button color="warn" (click)="deleteProdFromOrder(order._id)">DEL</button>
     </td>
   </tr>
   <tr>
@@ -90,8 +90,10 @@
     <td><b>R{{OrderTotal}}</b></td>
     <br />
   </tr>
+  <hr>
+  <br>
   <tr>
-    <button cmat-raised-button color="primary" *ngIf="submitButtonAvailable" (click)="onSubmitOrder()">submit order</button>
+    <button mat-raised-button color="primary" *ngIf="submitButtonAvailable" (click)="onSubmitOrder()">submit</button>
   </tr>
 </table>
 </div>
