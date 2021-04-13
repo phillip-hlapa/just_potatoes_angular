@@ -62,7 +62,7 @@ export class RegisterComponent implements OnInit {
         if (response) {
           this.isLoading = false;
           const id: any = response._id;
-          localStorage.setItem('userId', id)
+          sessionStorage.setItem('userId', id)
           this.isRegister = true;
          // this.router.navigateByUrl('home').then(r => {});
         }
@@ -78,7 +78,7 @@ export class RegisterComponent implements OnInit {
   verifyOTP() {
     let otp_response: any;
     const verifyOtp = {
-      userid: localStorage.getItem('userId'),
+      userid: sessionStorage.getItem('userId'),
       otp: this.optValue
 
     }

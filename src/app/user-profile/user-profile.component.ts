@@ -23,7 +23,7 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit() {
     // retrieve user Profile
-    this.getUser(localStorage.getItem('userId'));
+    this.getUser(sessionStorage.getItem('userId'));
 
   }
 
@@ -56,7 +56,7 @@ export class UserProfileComponent implements OnInit {
     if (this.updated_password) {
       this.User.password = this.updated_password;
     }
-    this.usersService.updateUser(this.User, localStorage.getItem('userId')).subscribe(response => {
+    this.usersService.updateUser(this.User, sessionStorage.getItem('userId')).subscribe(response => {
       console.log('helping')
       if(response) {
         this.User = response;

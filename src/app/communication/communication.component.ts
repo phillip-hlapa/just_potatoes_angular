@@ -33,7 +33,7 @@ export class CommunicationComponent implements OnInit {
   createMessage() {
     const message = {
       message_header: this.message_header,
-      sender: localStorage.getItem('userId'),
+      sender: sessionStorage.getItem('userId'),
       message: this.message,
     }
     console.log(message);
@@ -48,7 +48,7 @@ export class CommunicationComponent implements OnInit {
   }
 
   getMessages() {
-    const UserId = localStorage.getItem('userId');
+    const UserId = sessionStorage.getItem('userId');
     this.userService.getUserById(UserId).subscribe(response => {
       if (response) {
         const user: any = response;

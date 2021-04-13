@@ -26,44 +26,63 @@
 
 <div class="container" *ngIf="!isLoading && submitButtonAvailable">
 <div class="col">
-<table class="table" >
-  <tr *ngFor="let product of Products">
-    <td>
-      <div class="card mb-2" style="max-width: 600px;">
-        <div class="row g-0">
-          <div class="col-md-3">
-            <table>
-              <tr>
-                <td><img src="./assets/img/products/sample.jpg" alt="..." class="img-fluid"></td>
-              </tr>
-            </table>
-          </div>
-          <div class="col-md-10">
-            <div class="card-body">
-              <h2><b>R{{product.product_price}}</b></h2>
-              <h5 class="card-title"><b>{{product.product_name}}</b></h5>
-              <p class="card-text">{{product.product_description}}</p>
-              <p class="card-text" (click)="add_product(product._id)"><button type="button" name="button" class="btn btn-success" [disabled]="!canOrder">add</button></p>
-            </div>
-          </div>
+<!--<table class="table" >-->
+<!--  <tr *ngFor="let product of Products">-->
+<!--    <td>-->
+<!--      <div class="card mb-2" style="max-width: 600px;">-->
+<!--        <div class="row g-0">-->
+<!--          <div class="col-md-3">-->
+<!--            <table>-->
+<!--              <tr>-->
+<!--                <td><img src="./assets/img/products/sample.jpg" alt="..." class="img-fluid"></td>-->
+<!--              </tr>-->
+<!--            </table>-->
+<!--          </div>-->
+<!--          <div class="col-md-10">-->
+<!--            <div class="card-body">-->
+<!--              <h2><b>R{{product.product_price}}</b></h2>-->
+<!--              <h5 class="card-title"><b>{{product.product_name}}</b></h5>-->
+<!--              <p class="card-text">{{product.product_description}}</p>-->
+<!--              <p class="card-text" (click)="add_product(product._id)"><button type="button" name="button" class="btn btn-success" [disabled]="!canOrder">add</button></p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </td>-->
+<!--    </tr>-->
+<!--</table>-->
+  <br>
+  <h2 class="font-weight-bold mb-2">From the Shop</h2>
+  <p class="font-italic text-muted mb-4">Jus'Potatoes, only the finest quality!</p>
+
+  <div class="row pb-5 mb-4" *ngFor="let product of Products">
+    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+      <!-- Card-->
+      <div class="card rounded shadow-sm border-0">
+        <div class="card-body p-4"><img src="./assets/img/products/sample.jpg" width="650" height="400" alt="" class="img-fluid d-block mx-auto mb-3">
+          <h5> <a href="#" class="text-dark">{{product.product_name}}</a></h5>
+          <p class="small text-muted font-italic">{{product.product_description}}</p>
+          <ul class="list-inline small">
+            <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+            <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+            <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+            <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+            <li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>
+          </ul>
+          <button type="button"  (click)="add_product(product._id)" name="button" mat-raised-button color="accent" [disabled]="!canOrder">add</button>
         </div>
       </div>
-    </td>
-    </tr>
-</table>
+    </div>
+  </div>
 <table *ngIf="isThereOrder" class="table-striped">
   <th>Product</th>
   <th>Price</th>
-  <th>Quantity</th>
   <th>Remove</th>
   <tr *ngFor="let order of OrderedProducts">
     <td><b>{{order.product_name}}</b></td>
     <td><b>R{{order.product_price}}</b></td>
     <td>
-        <input class="form-control-sm" type="number" name="quantity" (input)="onChangeQuantity($event.target.value, order._id)">
-    </td>
-    <td>
-      <button class="btn btn-outline-danger btn-sm" (click)="deleteProdFromOrder(order._id)">del</button>
+      <button cmat-raised-button color="warn" (click)="deleteProdFromOrder(order._id)">del</button>
     </td>
   </tr>
   <tr>
@@ -72,7 +91,7 @@
     <br />
   </tr>
   <tr>
-    <button class="btn btn-success" *ngIf="submitButtonAvailable" (click)="onSubmitOrder()">submit order</button>
+    <button cmat-raised-button color="primary" *ngIf="submitButtonAvailable" (click)="onSubmitOrder()">submit order</button>
   </tr>
 </table>
 </div>

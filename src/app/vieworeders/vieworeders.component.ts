@@ -13,7 +13,7 @@ export class VieworedersComponent implements OnInit {
   constructor(private usersService: UsersService) { }
 
   ngOnInit(): void {
-    this.usersService.getUserOrders(localStorage.getItem('userId')).subscribe(orders => {
+    this.usersService.getUserOrders(sessionStorage.getItem('userId')).subscribe(orders => {
       this.UserOrders = orders;
       if(!this.UserOrders || this.UserOrders.length == 0) {
         this.thereIsOrder = false;

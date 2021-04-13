@@ -38,7 +38,7 @@ export class UsersService {
   }
 
     public isAuthenticated() {
-        this.getUserById(localStorage.getItem('userId')).subscribe(user => {
+        this.getUserById(sessionStorage.getItem('userId')).subscribe(user => {
           if (user) {
             const FoundUser: any = user;
             if (FoundUser != null && FoundUser._role != null) {
@@ -59,7 +59,7 @@ export class UsersService {
        return this.httpClient.post(this.endpoint_url + '/api-v2/users/update/'+ userId, User);
    }
     public verifyAuth(): boolean {
-      const auth = localStorage.getItem('userId')
+      const auth = sessionStorage.getItem('userId')
         if (auth) {
             return true;
         } else {
@@ -67,7 +67,7 @@ export class UsersService {
         }
     }
     public verifyUserRole(): boolean {
-      const userRole = localStorage.getItem('userRole')
+      const userRole = sessionStorage.getItem('userRole')
         if (userRole === 'NORMAL') {
             return false;
         } else {

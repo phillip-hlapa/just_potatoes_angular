@@ -33,23 +33,25 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { CommunicationComponent } from './communication/communication.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { VieworedersComponent } from './vieworeders/vieworeders.component';
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
-  imports: [
-    BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    ComponentsModule,
-    RouterModule,
-    AppRoutingModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
-    }),
-    MatProgressSpinnerModule,
-    MatExpansionModule,
-    MatFormFieldModule
-  ],
+    imports: [
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        ComponentsModule,
+        RouterModule,
+        AppRoutingModule,
+        AgmCoreModule.forRoot({
+            apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
+        }),
+        MatProgressSpinnerModule,
+        MatExpansionModule,
+        MatFormFieldModule,
+        MatButtonModule
+    ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,

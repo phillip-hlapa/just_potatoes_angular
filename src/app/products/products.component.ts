@@ -123,7 +123,7 @@ export class ProductsComponent implements OnInit {
         const orderDetails = {
             order_total: this.OrderTotal,
             order_products: this.Order,
-            order_by: localStorage.getItem('userId')
+            order_by: sessionStorage.getItem('userId')
         }
         this.productService.submitOrder(orderDetails).subscribe(result => {
             this.submitButtonAvailable = false;

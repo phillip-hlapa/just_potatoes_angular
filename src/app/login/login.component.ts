@@ -45,16 +45,17 @@ export class LoginComponent implements OnInit {
            this.setVariables(this.UserLoginResponse);
            this.router.navigateByUrl('dashboard').then(r => {});
         }
-
-
       }
     }, error => {
+      this.isLoading = false;
       console.log(error)
     })
   }
   private setVariables(User: any) {
-    localStorage.setItem('userId', User.userId);
-    localStorage.setItem('userRole', User.role);
+    sessionStorage.setItem('userId', User.userId)
+    sessionStorage.setItem('userRole', User.role)
+    // localStorage.setItem('userId', User.userId);
+    // localStorage.setItem('userRole', User.role);
   }
 
 }

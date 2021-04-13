@@ -218,7 +218,7 @@ isLoading: boolean = false;
     }
 
     getUserRole() {
-      this.usersService.getUserById(localStorage.getItem('userId')).subscribe(userResponse => {
+      this.usersService.getUserById(sessionStorage.getItem('userId')).subscribe(userResponse => {
           const user: any = userResponse;
           if (user.role === 'ADMIN' || user.role === 'SUPERUSER') {
               this.userIsAdmin = true;
