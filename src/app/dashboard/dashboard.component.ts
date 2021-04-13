@@ -175,11 +175,9 @@ isLoading: boolean = false;
       this.usersService.getUsers().subscribe(users => {
         this.Users = users;
         this.UsersSize = this.Users.length;
-        console.log(users)
       })
 
       this.productService.getOrders().subscribe(response => {
-          console.log(response)
           this.Orders = response;
           if (this.Orders) {
               this.calculateRevenue(this.Orders);

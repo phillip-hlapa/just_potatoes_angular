@@ -19,6 +19,7 @@ export class UserProfileComponent implements OnInit {
   updated_cell_number: any;
 
   updatedUser: boolean = false;
+  userCity: any;
   constructor(private usersService: UsersService) { }
 
   ngOnInit() {
@@ -30,7 +31,7 @@ export class UserProfileComponent implements OnInit {
   getUser(userId) {
     this.usersService.getUserById(userId).subscribe(user => {
       this.User = user;
-      console.log(user)
+      this.userCity = this.User.address.city;
     })
   }
 
@@ -39,25 +40,15 @@ export class UserProfileComponent implements OnInit {
   }
 
   changeDetailsDone(_id: any) {
-    console.log('should happen')
     this.changeDetails1 = true;
-    // const updateUser = {
-    //   username: this.updated_username,
-    //   password: this.updated_password,
-    //   contact: {
-    //     email: this.updated_email,
-    //     cell_number: this.updated_cell_number
-    //   },
-    //   address: {
-    //     house_number: this.updated_house_number,
-    //     street_name: this.updated_street_name
-    //   }
-    // }
+
     if (this.updated_password) {
       this.User.password = this.updated_password;
     }
+    if(this.userCity) {
+      this.User.address.city = this.userCity;
+    }
     this.usersService.updateUser(this.User, sessionStorage.getItem('userId')).subscribe(response => {
-      console.log('helping')
       if(response) {
         this.User = response;
         this.updatedUser = true;
