@@ -98,4 +98,13 @@ export class CommunicationComponent implements OnInit {
     console.log(messageId)
     console.log(this.replyMessage)
   }
+
+  deleteMessage(messageId: any) {
+      this.messagesService.deleteMessage(messageId).subscribe(deletedMessage => {
+        if(deletedMessage){
+          console.log('message deleted')
+        }
+      })
+    this.ngOnInit();
+  }
 }

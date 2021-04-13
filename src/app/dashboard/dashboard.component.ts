@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../../services/users/users.service';
 import { ProductService } from '../../services/products/product.service';
 import * as Chartist from 'chartist';
+import {MessagesService} from "../../services/messages/messages.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -32,9 +33,11 @@ isLoading: boolean = false;
   // deleting users
     acceptedOrder = false;
     role: any;
+    Messages: any;
+    MessageLength: any;
 
 
-  constructor(private usersService: UsersService, private productService: ProductService) { }
+  constructor(private messagesService: MessagesService, private usersService: UsersService, private productService: ProductService) { }
   startAnimationForLineChart(chart) {
       let seq: any, delays: any, durations: any;
       seq = 0;
@@ -188,6 +191,7 @@ isLoading: boolean = false;
 
       // get user role
       this.getUserRole();
+      this.getMessages();
       this.isLoading = false;
 
   }
@@ -270,5 +274,32 @@ isLoading: boolean = false;
       orders.forEach(order => {
           this.revenue = this.revenue + order.order_total;
       })
+    }
+    getMessages() {
+        const UserId = sessionStorage.getItem('userId');
+        this.usersService.getUserById(UserId).subscribe(response => {
+            if (response) {
+                const user: any = response;
+                console.log(user.role)
+                if (user.role === 'ADMIN') {
+                    this.messagesService.getAllMessages().subscribe(messages => {
+                        console.log(messages)
+                        this.Messages = messages;
+                        this.MessageLength = this.Messages.length;
+                    }, err => {
+                        console.log(err)
+                    });
+                } else {
+                    this.messagesService.getUserMessage(UserId).subscribe(messages => {
+                        console.log(messages)
+                        this.Messages = messages;
+                        this.MessageLength = this.Messages.length;
+                    }, err => {
+                        console.log(err)
+                    });
+                }
+            }
+        }, error => {})
+        this.isLoading = false;
     }
 }

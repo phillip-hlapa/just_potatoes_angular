@@ -26,7 +26,7 @@
                 <mat-expansion-panel hideToggle>
                     <mat-expansion-panel-header>
                         <mat-panel-title>
-                            <b>FROM:</b> &nbsp;{{message.sender.username}} &nbsp; &nbsp; <b>DATE:</b>&nbsp; {{message.dateCreated}}
+                            <b>FROM:</b> &nbsp;{{message.sender.username}} &nbsp; &nbsp; <b>DATE:</b>&nbsp; {{message.dateCreated.split('T')[0]}}
                         </mat-panel-title>
                         <mat-panel-description>
                             {{message.messageHeader}}
@@ -45,12 +45,14 @@
                                 <textarea #replyInf minlength="1" class="form-control" id="{{message._id}}" rows="3" name="reply" ></textarea>
                             </div>
                             <div align="centre">
-                                <button *ngIf="isReply" [disabled]="!(replyInf.value.length > 0)" (click)="replyMessage(message._id, replyInf.value)" class="btn btn-outline-primary btn-sm">send reply</button>
+                                <button *ngIf="isReply" default="Hello..." (click)="replyMessage(message._id, replyInf.value)" class="btn btn-outline-primary btn-sm">send reply</button>
                             </div>
                         </form>
                     </div>
                     <button *ngIf="!isReply" (click)="isReplyMessage()" class="btn btn-outline-primary btn-sm">Reply</button>
-
+                    <mat-action-row *ngIf="!userService.verifyUserRole()">
+                        <button mat-button color="primary" (click)="deleteMessage(message._id)">Delete</button>
+                    </mat-action-row>
                 </mat-expansion-panel>
             </mat-accordion>
                 <br>
