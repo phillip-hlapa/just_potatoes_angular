@@ -38,10 +38,10 @@ export class LoginComponent implements OnInit {
         this.isLoading = false;
         if (this.UserLoginResponse.message != null && this.UserLoginResponse.message === 'NOT FOUND') {
           this.errorLogin = 'you will need to register!';
-        } else if (this.UserLoginResponse.role !== 'ADMIN') {
+        } else if (this.UserLoginResponse.role !== 'ADMIN' && this.UserLoginResponse.message === true) {
           this.setVariables(this.UserLoginResponse);
           this.router.navigateByUrl('home').then(r => {});
-        } else if (this.UserLoginResponse.role === 'ADMIN') {
+        } else if (this.UserLoginResponse.role === 'ADMIN' && this.UserLoginResponse.message === true) {
            this.setVariables(this.UserLoginResponse);
            this.router.navigateByUrl('dashboard').then(r => {});
         }
