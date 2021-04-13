@@ -4,7 +4,7 @@
     <!-- For Demo Purpose -->
     <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
         <img src="./assets/img/mail-message-new.svg" alt="" class="img-fluid mb-3 d-none d-md-block">
-        <h1>Sending reply, one sec...</h1>
+        <h3>Sending reply, one sec...</h3>
 
     </div>
 
@@ -20,13 +20,13 @@
     </div>
     <br>
 
-        <div class="col-md-8 container-fluid" >
+        <div class="container-fluid" >
             <div  *ngFor="let message of Messages" >
             <mat-accordion >
                 <mat-expansion-panel hideToggle>
                     <mat-expansion-panel-header>
                         <mat-panel-title>
-                            <b>FROM:</b> &nbsp;{{message.sender.username}} &nbsp; &nbsp; <b>DATE:</b>&nbsp; {{message.dateCreated.split('T')[0]}}
+                            {{message.sender.username}} &nbsp; {{message.dateCreated.split('T')[0]}}
                         </mat-panel-title>
                         <mat-panel-description>
                             {{message.messageHeader}}
