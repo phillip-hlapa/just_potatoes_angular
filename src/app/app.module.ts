@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
+;
 
 
 import { AppRoutingModule } from './app.routing';
@@ -34,6 +34,8 @@ import { CommunicationComponent } from './communication/communication.component'
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { VieworedersComponent } from './vieworeders/vieworeders.component';
 import {MatButtonModule} from "@angular/material/button";
+import { DebugComponent } from './debug/debug.component';
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 @NgModule({
     imports: [
@@ -50,7 +52,8 @@ import {MatButtonModule} from "@angular/material/button";
         MatProgressSpinnerModule,
         MatExpansionModule,
         MatFormFieldModule,
-        MatButtonModule
+        MatButtonModule,
+        MatPaginatorModule,
     ],
   declarations: [
     AppComponent,
@@ -62,6 +65,7 @@ import {MatButtonModule} from "@angular/material/button";
     LogoutComponent,
     CommunicationComponent,
     VieworedersComponent,
+    DebugComponent,
 
   ],
   providers: [],

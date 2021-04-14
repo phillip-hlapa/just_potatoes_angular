@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
-
+import { environment } from '../../app/debug/env'
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
 
-    // endpoint_url = 'http://localhost:1993'
-       endpoint_url = 'https://rocky-brook-00154.herokuapp.com';
+       endpoint_url = environment.prod_url;
 
   constructor(private httpClient: HttpClient) { }
 

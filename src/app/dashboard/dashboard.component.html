@@ -150,36 +150,16 @@
                                   <td>{{order.order_date.split('T')[0]}} <b>{{order.order_date.split('T')[1].split('.')[0]}}</b></td>
                                   <td>R{{order.order_total}}</td>
                                   <td>
-                                      <button type="button" name="button" [disabled]="!userIsAdmin" (click)="acceptOrder(order._id)" *ngIf="order.order_status != 'ACCEPTED' && order.order_status != 'DECLINED' && order.order_status != 'DISPATCHED'" class="btn btn-outline-success btn-sm">
-                                      <div class="container" align="center" *ngIf="isLoading" >
-                                          <mat-spinner  diameter="20" color="warn" ></mat-spinner>
-                                      </div>
-                                      accept
-                                      </button>
+                                      <button type="button" name="button" [disabled]="!userIsAdmin" (click)="acceptOrder(order._id)" *ngIf="order.order_status != 'ACCEPTED' && order.order_status != 'DECLINED' && order.order_status != 'DISPATCHED'" class="btn btn-outline-success btn-sm">accept</button>
                                   </td>
                                   <td>
-                                      <button type="button" name="button" [disabled]="!userIsAdmin" (click)="declineOrder(order._id)" *ngIf="order.order_status != 'ACCEPTED' && order.order_status != 'DECLINED' && order.order_status != 'DISPATCHED'" class="btn btn-outline-danger btn-sm">
-                                          <div class="container" align="center" *ngIf="isLoading">
-                                              <mat-spinner diameter="20" color="warn" ></mat-spinner>
-                                          </div>
-                                          decline
-                                      </button>
+                                      <button type="button" name="button" [disabled]="!userIsAdmin" (click)="declineOrder(order._id)" *ngIf="order.order_status != 'ACCEPTED' && order.order_status != 'DECLINED' && order.order_status != 'DISPATCHED'" class="btn btn-outline-danger btn-sm">decline</button>
                                   </td>
                                   <td>
-                                      <button type="button" name="button" [disabled]="!userIsAdmin" (click)="dispatchOrder(order._id)" *ngIf="order.order_status === 'ACCEPTED'"class="btn btn-outline-secondary btn-sm">
-                                          <div class="container" align="center" *ngIf="isLoading">
-                                              <mat-spinner diameter="20" color="warn" ></mat-spinner>
-                                          </div>
-                                          dispatch
-                                      </button>
+                                      <button type="button" name="button" [disabled]="!userIsAdmin" (click)="dispatchOrder(order._id)" *ngIf="order.order_status === 'ACCEPTED'"class="btn btn-outline-secondary btn-sm">dispatch</button>
                                   </td>
                                   <td>
-                                      <button type="button" name="button" [disabled]="!userIsAdmin" (click)="reverseOrder(order._id)"  *ngIf="order.order_status === 'DECLINED'" class="btn btn-outline-warning btn-sm">
-                                          <div class="container" align="center" *ngIf="isLoading">
-                                              <mat-spinner diameter="20" color="warn" ></mat-spinner>
-                                          </div>
-                                          reverse
-                                      </button>
+                                      <button type="button" name="button" [disabled]="!userIsAdmin" (click)="reverseOrder(order._id)"  *ngIf="order.order_status === 'DECLINED'" class="btn btn-outline-warning btn-sm">reverse</button>
                                   </td>
                                   <td><label>{{order.order_status}}</label></td>
                               </tr>

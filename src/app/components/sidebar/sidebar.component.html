@@ -120,5 +120,11 @@
                 <p>Logout</p>
             </a>
         </li>
+        <li routerLinkActive="active"  class="nav-item">
+            <a class="nav-link" [routerLink]="['/debug']" *ngIf="userService.verifyAuth() && userService.verifyUserRole()">
+                <i class="material-icons">bug_report</i>
+                <p>Debug</p>
+            </a>
+        </li>
     </ul>
 </div>

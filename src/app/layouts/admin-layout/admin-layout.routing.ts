@@ -17,6 +17,7 @@ import {SidebarComponent} from '../../components/sidebar/sidebar.component';
 import {LogoutComponent} from '../../logout/logout.component';
 import {CommunicationComponent} from '../../communication/communication.component';
 import {VieworedersComponent} from "../../vieworeders/vieworeders.component";
+import {DebugComponent} from "../../debug/debug.component";
 
 
 export const AdminLayoutRoutes: Routes = [
@@ -76,5 +77,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'products',       component: ProductsComponent},
     { path: 'home',           component: HomeComponent},
     { path: 'contact-admin',  component: CommunicationComponent},
-    { path: 'my-orders',      component: VieworedersComponent}
+    { path: 'my-orders',      component: VieworedersComponent},
+    { path: 'debug',          component: DebugComponent}
 ];
