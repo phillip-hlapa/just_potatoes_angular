@@ -38,6 +38,8 @@ export class DebugComponent implements OnInit {
         this.isLoading = false;
         if(this.Logs.status && this.Logs.status === 'forbidden') {
           this.showError = true;
+        } else {
+          this.showError = false;
         }
       }
     })
