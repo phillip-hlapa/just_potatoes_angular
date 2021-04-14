@@ -1,5 +1,16 @@
 <div class="main-content" *ngIf="User">
-  <div class="container-fluid">
+    <div class="container" align="center" *ngIf="isLoading">
+        <mat-spinner color="warn" ></mat-spinner>
+        <br><br>
+        <!-- For Demo Purpose -->
+        <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
+            <img src="./assets/img/jus_potatoes.svg" alt="" class="img-fluid">
+            <h3 class="text-warning">loading profile! one moment...</h3>
+            <p class="font-italic text-muted mb-0">Jus'potatoes, we are potatoes</p>
+
+        </div>
+    </div>
+  <div class="container-fluid" *ngIf="!isLoading">
       <div class="row">
           <div class="col-md-8">
               <div class="card">

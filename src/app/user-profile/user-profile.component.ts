@@ -20,18 +20,23 @@ export class UserProfileComponent implements OnInit {
 
   updatedUser: boolean = false;
   userCity: any;
+  isLoading: boolean = false;
   constructor(private usersService: UsersService) { }
 
   ngOnInit() {
     // retrieve user Profile
     this.getUser(sessionStorage.getItem('userId'));
-
+    this.isLoading = false;
   }
 
   getUser(userId) {
+    this.isLoading = true;
     this.usersService.getUserById(userId).subscribe(user => {
       this.User = user;
       this.userCity = this.User.address.city;
+      if(this.User) {
+        this.isLoading = false;
+      }
     })
   }
 
