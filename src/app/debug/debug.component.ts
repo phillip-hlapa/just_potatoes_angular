@@ -15,6 +15,7 @@ export class DebugComponent implements OnInit {
 
 
    isLoading: boolean = false;
+   showError: boolean = false;
 
   constructor(private logsService: LogsService) { }
 
@@ -35,6 +36,9 @@ export class DebugComponent implements OnInit {
       if(logs) {
         this.Logs = logs;
         this.isLoading = false;
+        if(this.Logs.status && this.Logs.status === 'forbidden') {
+          this.showError = true;
+        }
       }
     })
   }
