@@ -75,4 +75,7 @@ export class UsersService {
     public getUserOrders(userId): Observable<Object> {
         return this.httpClient.get(this.endpoint_url + '/api/orders/user/' + userId)
     }
+    public getUserSlip(orderDetails: any): Observable<Object> {
+      return this.httpClient.post(this.endpoint_url + '/api-v2/users/slip', orderDetails);
+    }
 }

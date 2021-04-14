@@ -9,10 +9,12 @@ import {UsersService} from "../../services/users/users.service";
 export class VieworedersComponent implements OnInit {
   UserOrders: any;
   thereIsOrder: boolean = true;
+  mailSent: boolean = false;
 
   constructor(private usersService: UsersService) { }
 
   ngOnInit(): void {
+    this.mailSent = false;
     this.usersService.getUserOrders(sessionStorage.getItem('userId')).subscribe(orders => {
       this.UserOrders = orders;
       if(!this.UserOrders || this.UserOrders.length == 0) {
@@ -23,4 +25,16 @@ export class VieworedersComponent implements OnInit {
     })
   }
 
+  public getSlip(orderId){
+    let orderDetails = {
+      userId: sessionStorage.getItem('userId'),
+      orderId: orderId
+    }
+    this.usersService.getUserSlip(orderDetails).subscribe(slipResponse => {
+        if(slipResponse) {
+          console.log(slipResponse);
+          this.mailSent = true;
+        }
+    })
+  }
 }

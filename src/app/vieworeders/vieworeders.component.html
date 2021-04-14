@@ -11,10 +11,14 @@
 
         </div>
     </div>
+    <div class="alert alert-success alert-dismissible" *ngIf="mailSent">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Success!</strong> Order slip has been sent to your email: {{UserOrders[0].order_by.contact.email}}
+    </div>
     <div *ngIf="thereIsOrder">
-        <table class="table table-striped table-dark table-responsive-sm">
+        <table class="table table-striped table-responsive-sm">
             <caption class="text-uppercase" *ngIf="UserOrders">List of orders: <b>{{UserOrders[0].order_by.username}}</b></caption>
-            <thead>
+            <thead class="thead-dark">
             <tr>
                 <th>Date</th>
                 <th>Items</th>
@@ -23,19 +27,20 @@
             </tr>
             </thead>
             <tbody *ngFor="let order of UserOrders">
-                <tr [class]="order.order_status === 'ACCEPTED' ? 'table-success' : order.order_status === 'DISPATCHED' ? 'bg-success' : ''">
-                    <td align="left">{{order.order_date.split('T')[0]}}</td>
+                <tr [class]="order.order_status === 'ACCEPTED' ? 'table-success' : order.order_status === 'DISPATCHED' ? 'table-warning' : order.order_status === 'PENDING' ? 'table-light' : 'table-danger'">
+                    <td align="left" class="text-muted">{{order.order_date.split('T')[0]}}</td>
                     <td>
                        <ol class="list-group">
                            <div *ngFor="let product of order.order_products">
-                               <p>{{product.product_name}}</p>
+                               <p class="text-muted">{{product.product_name}}</p>
                            </div>
                        </ol>
                     </td>
-                    <td>R{{order.order_total}}</td>
-                    <td class="col-form-label-sm">{{order.order_status}}</td>
+                    <td class="text-muted">R{{order.order_total}}</td>
+                    <td class="col-form-label-sm"><button title="click to send slip to email" type="button" class="btn btn-link btn-sm" (click)="getSlip(order._id)">{{order.order_status}}</button></td>
                 </tr>
             </tbody>
         </table>
+
     </div>
 </div>
