@@ -10,17 +10,21 @@ export class VieworedersComponent implements OnInit {
   UserOrders: any;
   thereIsOrder: boolean = true;
   mailSent: boolean = false;
+  isLoading: boolean = false;
 
   constructor(private usersService: UsersService) { }
 
   ngOnInit(): void {
     this.mailSent = false;
+    this.isLoading = true;
     this.usersService.getUserOrders(sessionStorage.getItem('userId')).subscribe(orders => {
       this.UserOrders = orders;
       if(!this.UserOrders || this.UserOrders.length == 0) {
         this.thereIsOrder = false;
+        this.isLoading = false;
       } else {
         this.thereIsOrder = true;
+        this.isLoading = false;
       }
     })
   }

@@ -1,5 +1,16 @@
 <div class="main-content">
-    <div class="container" align="centre" *ngIf="!thereIsOrder">
+    <div class="container" align="center" *ngIf="isLoading">
+        <mat-spinner color="warn" ></mat-spinner>
+        <br><br>
+        <!-- For Demo Purpose -->
+        <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
+            <img src="./assets/img/jus_potatoes.svg" alt="" class="img-fluid">
+            <h3>loading your orders! one moment...</h3>
+            <p class="font-italic text-muted mb-0">Jus'potatoes, we are potatoes</p>
+
+        </div>
+    </div>
+    <div class="container" align="centre" *ngIf="!thereIsOrder && !isLoading">
         <div>
             <!-- For Demo Purpose -->
             <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
@@ -15,7 +26,8 @@
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>Success!</strong> Order slip has been sent to your email: {{UserOrders[0].order_by.contact.email}}
     </div>
-    <div *ngIf="thereIsOrder">
+
+    <div *ngIf="thereIsOrder && !isLoading">
         <table class="table table-striped table-responsive-sm">
             <caption class="text-uppercase" *ngIf="UserOrders">List of orders: <b>{{UserOrders[0].order_by.username}}</b></caption>
             <thead class="thead-dark">
@@ -37,7 +49,7 @@
                        </ol>
                     </td>
                     <td class="text-muted">R{{order.order_total}}</td>
-                    <td class="col-form-label-sm"><button title="click to send slip to email" type="button" class="btn btn-link btn-sm" (click)="getSlip(order._id)">{{order.order_status}}</button></td>
+                    <td class="col-form-label-sm"><button title="click to send slip to email" [disabled]="order.order_status === 'DECLINED'" type="button" class="btn btn-link btn-sm" (click)="getSlip(order._id)">{{order.order_status}}</button></td>
                 </tr>
             </tbody>
         </table>
