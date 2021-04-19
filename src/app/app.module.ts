@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-;
+import { MatTableModule } from '@angular/material/table'
 
 
 import { AppRoutingModule } from './app.routing';
@@ -35,10 +35,14 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { VieworedersComponent } from './vieworeders/vieworeders.component';
 import {MatButtonModule} from "@angular/material/button";
 import { DebugComponent } from './debug/debug.component';
-import {MatPaginatorModule} from "@angular/material/paginator";
+import { MatPaginatorModule } from "@angular/material/paginator";
+import { CdkTableModule} from '@angular/cdk/table';
 
 @NgModule({
     imports: [
+
+        CdkTableModule,
+        MatPaginatorModule,
         BrowserAnimationsModule,
         FormsModule,
         ReactiveFormsModule,
@@ -53,7 +57,7 @@ import {MatPaginatorModule} from "@angular/material/paginator";
         MatExpansionModule,
         MatFormFieldModule,
         MatButtonModule,
-        MatPaginatorModule,
+
     ],
   declarations: [
     AppComponent,

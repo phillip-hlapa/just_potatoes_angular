@@ -29,6 +29,9 @@ export class VieworedersComponent implements OnInit {
     })
   }
 
+  public isMailSent() {
+    return this.mailSent;
+  }
   public getSlip(orderId){
     let orderDetails = {
       userId: sessionStorage.getItem('userId'),
@@ -38,6 +41,12 @@ export class VieworedersComponent implements OnInit {
         if(slipResponse) {
           console.log(slipResponse);
           this.mailSent = true;
+
+
+          setTimeout(() => {
+            this.mailSent = false;
+          }, 3000);
+
         }
     })
   }

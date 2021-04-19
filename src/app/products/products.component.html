@@ -1,5 +1,5 @@
-<br />
-<br />
+
+<div class="main-content">
 
 <div class="container-fluid" align="center" *ngIf="isLoading">
   <mat-spinner color="warn" ></mat-spinner>
@@ -71,7 +71,7 @@
       <!-- Card-->
       <div class="card rounded shadow-sm border-0">
         <div class="card-body p-4"><img src="./assets/img/products/sample.jpg" width="650" height="400" alt="" class="img-fluid d-block mx-auto mb-3">
-          <h5> <a href="#" class="text-dark">{{product.product_name}}</a></h5>
+          <h5> <a href="#" class="text-dark">{{product.product_name}} <br> <h5 class="header-title"><b>{{product.product_currency}}{{product.product_price}}</b></h5></a></h5>
           <p class="small text-muted font-italic">{{product.product_description}}</p>
           <ul class="list-inline small">
             <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
@@ -85,27 +85,47 @@
       </div>
     </div>
   </div>
-<table *ngIf="isThereOrder" class="table table-dark table-responsive">
+<table *ngIf="isThereOrder" class="table table-striped">
+  <thead class="thead-dark">
   <th>Product</th>
   <th>Price</th>
+  <th>Qty</th>
   <th>Remove</th>
+  </thead>
   <tr *ngFor="let order of OrderedProducts">
     <td><b>{{order.product_name}}</b></td>
     <td><b>R{{order.product_price}}</b></td>
     <td>
-      <button mat-stroked-button color="warn" (click)="deleteProdFromOrder(order._id)">DEL</button>
+      <b>
+        <select class="form-select form-select-sm" aria-label=".form-select-sm example" #t (change)="onSelectChange(t.value, order._id)" >
+          <option selected>{{order.product_quantity}}</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">8</option>
+          <option value="6">12</option>
+          <option value="7">20</option>
+          <option value="8">30</option>
+        </select>
+      </b>
     </td>
-  </tr>
-  <tr>
-    <td><b><h4>Total</h4></b></td>
-    <td><b>R{{OrderTotal}}</b></td>
-    <br />
+    <td>
+      <button mat-stroked-button color="warn" (click)="deleteProdFromOrder(order._id)"><span class="material-icons">delete_forever</span></button>
+    </td>
   </tr>
   <hr>
   <br>
-  <tr>
-    <button mat-raised-button color="primary" *ngIf="submitButtonAvailable" (click)="onSubmitOrder()">submit</button>
-  </tr>
 </table>
+<!--<table class="table table-borderless">-->
+<!--  <tr>-->
+<!--    <td><b><h4>Total</h4></b></td>-->
+<!--    <td><b>R{{OrderTotal}}</b></td>-->
+<!--    <br />-->
+<!--  </tr>-->
+<!--</table>-->
+  <label [hidden]="!isThereOrder" class="form-control-sm">Total: R{{OrderTotal}}</label> <br>
+  <button [hidden]="!isThereOrder" mat-raised-button color="primary" *ngIf="submitButtonAvailable" (click)="onSubmitOrder()">submit</button>
+</div>
 </div>
 </div>

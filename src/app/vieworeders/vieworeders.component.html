@@ -22,7 +22,7 @@
 
         </div>
     </div>
-    <div class="alert alert-success alert-dismissible" *ngIf="mailSent">
+    <div class="alert alert-success alert-dismissible" *ngIf="isMailSent()">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>Success!</strong> Order slip has been sent to your email: {{UserOrders[0].order_by.contact.email}}
     </div>
