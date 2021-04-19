@@ -24,16 +24,20 @@ export class ProductsComponent implements OnInit {
   //submitting order
    submitButtonAvailable = true;
    isLoading: boolean = false;
+   isLoadingIsLoadingProducts: boolean = false;
 
   ngOnInit(): void {
+
     this.GetProducts();
     this.canOrder = this.userService.verifyAuth();
   }
 
   private GetProducts() {
+    this.isLoadingIsLoadingProducts = true;
     this.productService.getProducts().subscribe(response => {
       console.log(response)
       this.Products = response;
+      this.isLoadingIsLoadingProducts = false;
     }, err => {
       console.log(err)
     });

@@ -11,6 +11,17 @@
     <p class="font-italic text-muted mb-0">Jus'potatoes, we are potatoes</p>
   </div>
 </div>
+<div class="container" align="center" *ngIf="isLoadingIsLoadingProducts">
+  <mat-spinner color="warn" ></mat-spinner>
+  <br><br>
+  <!-- For Demo Purpose -->
+  <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
+    <img src="./assets/img/jus_potatoes.svg" alt="" class="img-fluid">
+    <h3 class="text-warning">loading products one second...</h3>
+    <p class="font-italic text-muted mb-0">Jus'potatoes, we are potatoes</p>
+
+  </div>
+</div>
 
 <div class="container" align="center" *ngIf="!isLoading && !submitButtonAvailable">
   <!-- For Demo Purpose -->
@@ -52,7 +63,7 @@
 <!--    </tr>-->
 <!--</table>-->
   <br>
-  <h2 class="font-weight-bold mb-2">From the Shop</h2>
+  <h2 class="font-weight-bold mb-2">From The Shop</h2>
   <p class="font-italic text-muted mb-4">Jus'Potatoes, only the finest quality!</p>
 
   <div class="row pb-5 mb-4" *ngFor="let product of Products">
