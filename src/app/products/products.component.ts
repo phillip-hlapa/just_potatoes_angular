@@ -158,11 +158,25 @@ export class ProductsComponent implements OnInit {
 
     private onSubmitOrder() {
       this.isLoading = true;
+      let orderMetadata: Array<any> = [];
+      let mt: any;
+      this.OrderedProducts.forEach(product => {
+          let index = this.Order.indexOf(product._id);
+          if(index !== -1) {
+             mt = {
+                 product_id: product._id,
+                 product_qty: product.product_quantity
+             }
+             orderMetadata.push(mt);
+          }
+      })
         const orderDetails = {
             order_total: this.OrderTotal,
             order_products: this.Order,
-            order_by: sessionStorage.getItem('userId')
+            order_by: sessionStorage.getItem('userId'),
+            order_metadata: orderMetadata
         }
+        console.log(orderDetails)
         this.productService.submitOrder(orderDetails).subscribe(result => {
             this.submitButtonAvailable = false;
             if (result) {
@@ -171,8 +185,8 @@ export class ProductsComponent implements OnInit {
         })
     }
 
-   private goHome() {
-        this.router.navigateByUrl('home').then(homeUrl => {})
+   private goToOrderDetails() {
+        this.router.navigateByUrl('my-orders').then(Orders => {})
     }
 
     onChangeQuantity(value: any, _id: any) {

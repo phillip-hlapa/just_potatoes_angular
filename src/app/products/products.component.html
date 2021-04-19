@@ -27,9 +27,9 @@
   <!-- For Demo Purpose -->
   <div class="col-md-2">
     <img src="./assets/img/dwcheckyes.svg" alt="" class="img-fluid">
-    <h6 class="text-warning">DONE! please find the slip sent to your email</h6>
+    <h6 class="text-success">DONE! please find the slip sent to your email</h6>
     <br>
-    <button class="btn btn-success" (click)="goHome()">go home</button>
+    <button class="btn btn-success" (click)="goToOrderDetails()">view my orders</button>
   </div>
 </div>
 
@@ -111,7 +111,7 @@
       </b>
     </td>
     <td>
-      <button mat-stroked-button color="warn" (click)="deleteProdFromOrder(order._id)"><span class="material-icons">delete_forever</span></button>
+      <button mat-stroked-button color="primary" (click)="deleteProdFromOrder(order._id)"><span class="material-icons">delete_forever</span></button>
     </td>
   </tr>
   <hr>
