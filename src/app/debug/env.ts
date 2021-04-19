@@ -1,4 +1,5 @@
 export const environment = {
     //prod_url: 'http://localhost:1993',
-    prod_url: 'https://rocky-brook-00154.herokuapp.com'
+    prod_url_heroku: 'https://rocky-brook-00154.herokuapp.com',
+    prod_url_glitch: 'https://quasar-holistic-bicycle.glitch.me'
 };

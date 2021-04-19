@@ -7,7 +7,7 @@ import { environment } from '../../app/debug/env'
 })
 export class UsersService {
 
-       endpoint_url = environment.prod_url;
+       endpoint_url = environment.prod_url_glitch;
 
   constructor(private httpClient: HttpClient) { }
 

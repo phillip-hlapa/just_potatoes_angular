@@ -8,7 +8,7 @@ import { environment } from '../../app/debug/env'
 })
 export class MessagesService {
 
-  endpoint_url = environment.prod_url;
+  endpoint_url = environment.prod_url_glitch;
 
   constructor(private httpClient: HttpClient) { }
 

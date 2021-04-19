@@ -9,7 +9,7 @@ import { environment } from '../../app/debug/env'
 export class ProductService {
 
    // endpoint_url = 'http://localhost:1993'
-    endpoint_url = environment.prod_url;
+    endpoint_url = environment.prod_url_heroku;
 
   constructor(private httpClient: HttpClient) { }
 
