@@ -32,7 +32,7 @@ export class DebugComponent implements OnInit {
 
   getLogs(limit: any, skip: any) {
     this.isLoading = true;
-    this.logsService.getLogs(limit ? limit : 30, skip ? skip : 1).subscribe(logs => {
+    this.logsService.getLogs(limit ? limit : 100, skip ? skip : 1).subscribe(logs => {
       if(logs) {
         this.Logs = logs;
         this.isLoading = false;
