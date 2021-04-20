@@ -12,7 +12,11 @@ export class ProductsComponent implements OnInit {
 
   constructor(private router: Router, private productService: ProductService, private userService: UsersService) { }
 
-  Edit_Product: any;
+  Edit_Product: any =  {
+      product_name: '',
+      product_price: '',
+      product_description: ''
+  };
 
   Products;
   Order: Array<any> = [];
@@ -174,11 +178,13 @@ export class ProductsComponent implements OnInit {
           if(index !== -1) {
              mt = {
                  product_id: product._id,
-                 product_qty: product.product_quantity
+                 product_qty: product.product_quantity,
+                 total: this.OrderTotal
              }
              orderMetadata.push(mt);
           }
       })
+        console.log(orderMetadata)
         const orderDetails = {
             order_total: this.OrderTotal,
             order_products: this.Order,
