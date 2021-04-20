@@ -1,5 +1,5 @@
 
-<div class="main-content">
+<div class="main-content" >
 
 <div class="container-fluid" align="center" *ngIf="isLoading">
   <mat-spinner color="warn" ></mat-spinner>
@@ -35,7 +35,7 @@
 
 
 
-<div class="container" *ngIf="!isLoading && submitButtonAvailable">
+<div class="container" *ngIf="!isLoading && submitButtonAvailable && !isLoadingIsLoadingProducts" align="center">
 <div class="col">
 <!--<table class="table" >-->
 <!--  <tr *ngFor="let product of Products">-->
@@ -67,12 +67,12 @@
   <p class="font-italic text-muted mb-4">Jus'Potatoes, only the finest quality!</p>
 
   <div class="row pb-5 mb-4" *ngFor="let product of Products">
-    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+    <div class="col-lg-6 col-md-6 mb-4 mb-lg-0">
       <!-- Card-->
       <div class="card rounded shadow-sm border-0">
-        <div class="card-body p-4"><img src="./assets/img/products/sample.jpg" width="650" height="400" alt="" class="img-fluid d-block mx-auto mb-3">
-          <h5> <a href="#" class="text-dark">{{product.product_name}} <br> <h5 class="header-title"><b>{{product.product_currency}}{{product.product_price}}</b></h5></a></h5>
-          <p class="small text-muted font-italic">{{product.product_description}}</p>
+        <div class="card-body p-2"><img src="./assets/img/products/sample.jpg" alt="" class="img-fluid d-block mx-auto mb-3">
+          <h5> <a  class="text-dark">{{product.product_name}} <br> <h5 class="header-title"><b>{{product.product_currency}}{{product.product_price}}</b></h5></a></h5>
+          <p class="text-muted">{{product.product_description}}</p>
           <ul class="list-inline small">
             <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
             <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
@@ -81,6 +81,8 @@
             <li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>
           </ul>
           <button type="button"  (click)="add_product(product._id)" name="button" mat-raised-button color="accent" [disabled]="!canOrder">ADD</button>
+         &nbsp;&nbsp;
+          <button type="button" [hidden]="!isUserAdmin()"  data-toggle="modal" data-target="#exampleModal"  (click)="edit_product(product._id)" name="button" mat-raised-button color="secondary" [disabled]="!canOrder">EDIT</button>
         </div>
       </div>
     </div>
@@ -126,6 +128,39 @@
 <!--</table>-->
   <label [hidden]="!isThereOrder" class="form-control-sm">Total: R{{OrderTotal}}</label> <br>
   <button [hidden]="!isThereOrder" mat-raised-button color="primary" *ngIf="submitButtonAvailable" (click)="onSubmitOrder()">submit</button>
+</div>
+</div>
+</div>
+
+
+<div *ngIf="Edit_Product !== null">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLabel" ><b>Edit Product</b></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="product_name">Product Name</label>
+            <input type="email" class="form-control" id="product_name" name="Edit_Product.product_name" [(ngModel)]="Edit_Product.product_name" aria-describedby="emailHelp" value="{{Edit_Product.product_name}}">
+          </div>
+          <div class="form-group">
+            <label for="product_price">Price</label>
+            <input type="tel" class="form-control" name="Edit_Product.product_price" [(ngModel)]="Edit_Product.product_price" id="product_price" value="{{Edit_Product.product_price}}">
+          </div>
+          <div class="form-group">
+            <label for="product_description">Description</label>
+            <input type="tel" class="form-control" name="Edit_Product.product_description" [(ngModel)]="Edit_Product.product_description" id="product_description" value="{{Edit_Product.product_description}}">
+          </div>
+        </form>
+          <button type="submit" mat-raised-button color="warn" (click)="onUpdate()" class="btn btn-sm" data-dismiss="modal">Update</button>
+      </div>
+  </div>
 </div>
 </div>
 </div>

@@ -48,7 +48,11 @@ export class ProductService {
     return this.httpClient.get(this.endpoint_url + '/api/orders/reverse/' + _id);
   }
 
-    getOrderById(orderId: any) : Observable<Object> {
+  public  getOrderById(orderId: any) : Observable<Object> {
       return this.httpClient.get(this.endpoint_url + '/api/orders/' + orderId);
+    }
+
+  public updateProduct(Edit_Product: any): Observable<Object> {
+      return this.httpClient.post(this.endpoint_url + '/api-v2/products/update', Edit_Product);
     }
 }

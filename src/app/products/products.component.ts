@@ -12,6 +12,8 @@ export class ProductsComponent implements OnInit {
 
   constructor(private router: Router, private productService: ProductService, private userService: UsersService) { }
 
+  Edit_Product: any;
+
   Products;
   Order: Array<any> = [];
   OrderedProducts: Array<any> = [];
@@ -27,25 +29,32 @@ export class ProductsComponent implements OnInit {
    isLoadingIsLoadingProducts: boolean = false;
 
   ngOnInit(): void {
-
     this.GetProducts();
     this.canOrder = this.userService.verifyAuth();
+  }
+
+  private isUserAdmin() {
+     return this.userService.verifyUserRole();
   }
 
   private GetProducts() {
     this.isLoadingIsLoadingProducts = true;
     this.productService.getProducts().subscribe(response => {
-      console.log(response)
+      // console.log(response)
       this.Products = response;
       this.isLoadingIsLoadingProducts = false;
     }, err => {
       console.log(err)
     });
   }
-
+  public edit_product(product_id: any) {
+      // console.log('edit: ' + product_id)
+      this.productService.getProduct(product_id).subscribe(editProduct => {
+         this.Edit_Product = editProduct;
+      })
+  }
   public add_product(product_id: any) {
       let productExists = false
-      console.log('hao: ' + this.Order.indexOf(product_id))
       if(this.Order.indexOf(product_id) === -1) {
           this.Order.push(product_id);
           productExists = false;
@@ -76,7 +85,7 @@ export class ProductsComponent implements OnInit {
               } else {
                   this.OrderedProducts.push(productOrdered);
               }
-              console.log(this.OrderTotal)
+              // console.log(this.OrderTotal)
           })
   }
   private deleteProdFromOrder(product_id: any) {
@@ -207,10 +216,21 @@ export class ProductsComponent implements OnInit {
     }
 
     onSelectChange(value: any, id: any) {
-        console.log(value)
         this.OrderedProducts.forEach(product => {
             if(product._id === id) {
                 product.product_quantity = value;
+            }
+            this.OrderTotal = 0;
+            this.OrderedProducts.forEach(product => {
+                this.OrderTotal = this.OrderTotal + (parseInt(product.product_quantity) * parseInt(product.product_price))
+            })
+        })
+    }
+
+    onUpdate() {
+        this.productService.updateProduct(this.Edit_Product).subscribe(editedProduct => {
+            if(editedProduct){
+                this.ngOnInit()
             }
         })
     }
