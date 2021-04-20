@@ -49,7 +49,7 @@
                        </ol>
                     </td>
                     <td class="text-muted">R{{order.order_total}}</td>
-                    <td class="col-form-label-sm"><button title="click to send slip to email" [disabled]="order.order_status === 'DECLINED' ? true : order.order_status === 'PENDING' ? true : false" type="button" class="btn btn-link btn-sm" (click)="getSlip(order._id)">{{order.order_status}}</button></td>
+                    <td class="col-form-label-sm"><button title="click to send slip to email" [disabled]="order.order_status === 'DECLINED' ? true : order.order_status === 'PENDING' ? true : false" type="button" class="btn btn-link btn-sm" >{{order.order_status}}</button></td>
                 </tr>
             </tbody>
         </table>
