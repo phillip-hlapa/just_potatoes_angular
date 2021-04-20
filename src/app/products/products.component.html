@@ -155,7 +155,7 @@
           </div>
           <div class="form-group">
             <label for="product_description">Description</label>
-            <input type="tel" class="form-control" name="Edit_Product.product_description" [(ngModel)]="Edit_Product.product_description" id="product_description" value="{{Edit_Product.product_description}}">
+            <input type="text" class="form-control" name="Edit_Product.product_description" [(ngModel)]="Edit_Product.product_description" id="product_description" value="{{Edit_Product.product_description}}">
           </div>
         </form>
           <button type="submit" mat-raised-button color="warn" (click)="onUpdate()" class="btn btn-sm" data-dismiss="modal">Update</button>
