@@ -10,7 +10,7 @@ export class LogsService {
 
   constructor(private httpClient: HttpClient) { }
 
-  endpoint_url = environment.prod_url_glitch;
+  endpoint_url = environment.prod_url_heroku;
 
   public getLogs(limit: any, skip: any): Observable<Object> {
     return this.httpClient.get(this.endpoint_url + '/api-v2/logs/' + sessionStorage.getItem('userId') + '?limit=' + limit + '&skip=' + skip);

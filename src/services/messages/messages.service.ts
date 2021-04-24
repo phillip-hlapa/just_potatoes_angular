@@ -8,7 +8,7 @@ import { environment } from '../../app/debug/env'
 })
 export class MessagesService {
 
-  endpoint_url = environment.prod_url_glitch;
+  endpoint_url = environment.prod_url_heroku;
 
   constructor(private httpClient: HttpClient) { }
 
