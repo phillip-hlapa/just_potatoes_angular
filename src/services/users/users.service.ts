@@ -77,4 +77,13 @@ export class UsersService {
     public getUserSlip(orderDetails: any): Observable<Object> {
       return this.httpClient.post(this.endpoint_url + '/api-v2/users/slip', orderDetails);
     }
+
+    public sendTest(): Observable<Object>  {
+        return this.httpClient.get(this.endpoint_url + '/api/test');
+    }
+
+    sentTest2(): Observable<Object>  {
+        return this.httpClient.get(environment.prod_url_glitch + '/api/test');
+    }
+
 }
