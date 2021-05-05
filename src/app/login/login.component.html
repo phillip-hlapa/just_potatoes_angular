@@ -1,5 +1,5 @@
 <!-- Navbar-->
-<header class="header">
+<header class="header" *ngIf="!isLoading">
     <nav class="navbar navbar-expand-lg navbar-light py-3">
         <div class="container">
             <!-- Navbar Brand -->
@@ -11,6 +11,8 @@
 </header>
 
 <div class="container" align="center" *ngIf="isLoading">
+
+    <br><br>
     <mat-spinner color="warn" ></mat-spinner>
     <br><br>
         <!-- For Demo Purpose -->
