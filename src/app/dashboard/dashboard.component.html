@@ -154,16 +154,32 @@
 <!--                                      <div class="spinner-border text-primary" role="status">-->
 <!--                                          <span class="sr-only">Loading...</span>-->
 <!--                                      </div>-->
-                                      <button type="button" name="button" [disabled]="!userIsAdmin" (click)="acceptOrder(order._id)" *ngIf="order.order_status != 'ACCEPTED' && order.order_status != 'DECLINED' && order.order_status != 'DISPATCHED'" class="btn btn-outline-success btn-sm">accept</button>
+                                      <button type="button" name="button1" id="accept_button" [disabled]="!userIsAdmin" #button1 (click)="acceptOrder(order, button1)" *ngIf="order.order_status != 'ACCEPTED' && order.order_status != 'DECLINED' && order.order_status != 'DISPATCHED'" class="btn btn-outline-success btn-sm">
+                                          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="button1.value === 'loading'"></span>
+                                          <span class="visually-hidden" *ngIf="button1.value === 'loading'"></span>
+                                          <span *ngIf="button1.value != 'loading'">accept</span>
+                                      </button>
                                   </td>
                                   <td>
-                                      <button type="button" name="button" [disabled]="!userIsAdmin" (click)="declineOrder(order._id)" *ngIf="order.order_status != 'ACCEPTED' && order.order_status != 'DECLINED' && order.order_status != 'DISPATCHED'" class="btn btn-outline-danger btn-sm">decline</button>
+                                      <button type="button" name="button2" [disabled]="!userIsAdmin" #button2 (click)="declineOrder(order, button2)" *ngIf="order.order_status != 'ACCEPTED' && order.order_status != 'DECLINED' && order.order_status != 'DISPATCHED'" class="btn btn-outline-danger btn-sm">
+                                          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="button2.value === 'loading'"></span>
+                                          <span class="visually-hidden" *ngIf="button2.value === 'loading'"></span>
+                                          <span *ngIf="button2.value != 'loading'">decline</span>
+                                      </button>
                                   </td>
                                   <td>
-                                      <button type="button" name="button" [disabled]="!userIsAdmin" (click)="dispatchOrder(order._id)" *ngIf="order.order_status === 'ACCEPTED'"class="btn btn-outline-secondary btn-sm">dispatch</button>
+                                      <button type="button" name="button3"  #button3  [disabled]="!userIsAdmin" (click)="dispatchOrder(order, button3)" *ngIf="order.order_status === 'ACCEPTED'"class="btn btn-outline-secondary btn-sm">
+                                          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="button3.value === 'loading'"></span>
+                                          <span class="visually-hidden" *ngIf="button3.value === 'loading'"></span>
+                                          <span *ngIf="button3.value != 'loading'">dispatch</span>
+                                      </button>
                                   </td>
                                   <td>
-                                      <button type="button" name="button" [disabled]="!userIsAdmin" (click)="reverseOrder(order._id)"  *ngIf="order.order_status === 'DECLINED'" class="btn btn-outline-warning btn-sm">reverse</button>
+                                      <button type="button" name="button4" #button4 [disabled]="!userIsAdmin" (click)="reverseOrder(order, button4)"  *ngIf="order.order_status === 'DECLINED'" class="btn btn-outline-warning btn-sm">
+                                          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="button4.value === 'loading'"></span>
+                                          <span class="visually-hidden" *ngIf="button4.value === 'loading'"></span>
+                                          <span *ngIf="button4.value != 'loading'">reverse</span>
+                                      </button>
                                   </td>
                                   <td><label>{{order.order_status}}</label></td>
                               </tr>

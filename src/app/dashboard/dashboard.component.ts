@@ -21,7 +21,8 @@ UserRoleCount = 0;
 // Orders
 Orders: any;
 OrderByUser: any = null;
-
+order_id: any;
+order_status: any;
 
 
 //
@@ -194,6 +195,11 @@ isLoading: boolean = false;
       this.getMessages();
       this.isLoading = false;
 
+      //stop button load
+        this.order_id = {};
+        this.order_status = {};
+
+
   }
   onDelete(userId) {
       console.log(userId)
@@ -232,9 +238,10 @@ isLoading: boolean = false;
       })
     }
 
-    acceptOrder(_id: any) {
+    acceptOrder(order: any, button: HTMLButtonElement) {
       this.isLoading = true;
-        this.productService.acceptOrder(_id).subscribe(acceptedOrder => {
+       button.value = 'loading'
+        this.productService.acceptOrder(order._id).subscribe(acceptedOrder => {
             console.log(acceptedOrder);
             if (acceptedOrder) {
                 this.acceptedOrder = true;
@@ -244,18 +251,35 @@ isLoading: boolean = false;
     }
 
     // order management
-    declineOrder(_id: any) {
+    declineOrder(order: any, button: HTMLButtonElement) {
         this.isLoading = true;
-        this.productService.declineOrder(_id).subscribe(declinedOrder => {console.log(declinedOrder); this.ngOnInit(); })
+        button.value = 'loading'
+        this.productService.declineOrder(order._id).subscribe(declinedOrder => {
+            if(declinedOrder) {
+
+            }
+            this.ngOnInit() ;
+        })
     }
-    dispatchOrder(_id: any) {
+    dispatchOrder(order: any, button: HTMLButtonElement) {
         this.isLoading = true;
-        this.productService.dispatchOrder(_id).subscribe(dispatchOrder => {console.log(dispatchOrder); this.ngOnInit(); })
+        button.value = 'loading'
+        this.productService.dispatchOrder(order._id).subscribe(dispatchOrder => {
+            if(dispatchOrder) {
+
+            }
+            this.ngOnInit();
+        })
     }
 
-    reverseOrder(_id: any) {
+    reverseOrder(order: any, button: HTMLButtonElement) {
         this.isLoading = true;
-        this.productService.reverseOrder(_id).subscribe(reverseOrder => {console.log(reverseOrder); this.ngOnInit(); })
+        button.value = 'loading'
+        this.productService.reverseOrder(order._id).subscribe(reverseOrder => {
+           if(reverseOrder) {
+           }
+            this.ngOnInit();
+        })
     }
 
 
@@ -269,7 +293,6 @@ isLoading: boolean = false;
         })
     }
     // revenue calculation
-
     calculateRevenue(orders: any) {
       orders.forEach(order => {
           this.revenue = this.revenue + order.order_total;
