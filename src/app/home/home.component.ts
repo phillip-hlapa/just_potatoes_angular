@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   constructor(private usersService: UsersService, private router: Router) { }
 
   ngOnInit(): void {
-    this.submitRequest();
+    //this.submitRequest();
   }
 
   submitRequest() {
