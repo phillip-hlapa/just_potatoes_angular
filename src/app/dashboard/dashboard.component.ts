@@ -201,19 +201,20 @@ isLoading: boolean = false;
 
 
   }
-  onDelete(userId) {
+  onDelete(userId, button: HTMLButtonElement) {
       console.log(userId)
+      button.value = 'loading';
       this.usersService.deleteUser(userId).subscribe(message => {console.log(message)})
       this.ngOnInit();
   }
 
   // update user role
-    onUpdateRole(_id: any) {
-        this.UserRoleCount++;
+    onUpdateRole(_id: any, button: HTMLButtonElement) {
+      this.UserRoleCount++;
+      button.value = 'loading'
       if (this.UserRoleCount === 3) {
           this.UserRoleCount = 0;
       }
-        console.log(_id);
         const userRole = {
             userId: _id,
             role: this.UserRole[this.UserRoleCount]
@@ -303,10 +304,8 @@ isLoading: boolean = false;
         this.usersService.getUserById(UserId).subscribe(response => {
             if (response) {
                 const user: any = response;
-                console.log(user.role)
                 if (user.role === 'ADMIN') {
                     this.messagesService.getAllMessages().subscribe(messages => {
-                        console.log(messages)
                         this.Messages = messages;
                         this.MessageLength = this.Messages.length;
                     }, err => {
@@ -314,7 +313,6 @@ isLoading: boolean = false;
                     });
                 } else {
                     this.messagesService.getUserMessage(UserId).subscribe(messages => {
-                        console.log(messages)
                         this.Messages = messages;
                         this.MessageLength = this.Messages.length;
                     }, err => {

@@ -240,4 +240,8 @@ export class ProductsComponent implements OnInit {
             }
         })
     }
+
+    isSignedIn() {
+        return this.userService.verifyAuth();
+    }
 }

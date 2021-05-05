@@ -82,7 +82,7 @@
           </ul>
           <button type="button"  (click)="add_product(product._id)" name="button" mat-raised-button color="accent" [disabled]="!canOrder">ADD</button>
          &nbsp;&nbsp;
-          <button type="button" [hidden]="!isUserAdmin()"  data-toggle="modal" data-target="#exampleModal"  (click)="edit_product(product._id)" name="button" mat-raised-button color="secondary" [disabled]="!canOrder">EDIT</button>
+          <button type="button" [hidden]="!isUserAdmin() || !isSignedIn()"  data-toggle="modal" data-target="#exampleModal"  (click)="edit_product(product._id)" name="button" mat-raised-button color="secondary" [disabled]="!canOrder">EDIT</button>
         </div>
       </div>
     </div>
