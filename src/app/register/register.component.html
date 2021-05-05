@@ -12,11 +12,18 @@
 
 <div class="container" align="center" *ngIf="isLoading">
     <br><br>
-    <mat-spinner color="warn" ></mat-spinner>
+    <div class="spinner-border text-warning" role="status">
+        <span class="visually-hidden"></span>
+    </div>
     <br><br>
     <!-- For Demo Purpose -->
     <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
         <img src="./assets/img/jus_potatoes.svg" alt="" class="img-fluid mb-3 d-none d-md-block">
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border text-warning" style="width: 3rem; height: 3rem;" role="status">
+                <span class="visually-hidden"></span>
+            </div>
+        </div>
         <h1 class="text-warning">Registering you! one moment</h1>
         <p class="font-italic text-muted mb-0">Jus'potatoes, we are potatoes</p>
 
