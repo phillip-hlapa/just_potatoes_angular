@@ -51,13 +51,17 @@
             <img src="./assets/img/jus_potatoes.svg" alt="" class="img-fluid mb-3 d-none d-md-block">
             <h2 class="text-muted text-warningtext-muted text-warning">{{registration_verify}}</h2>
             <p class="text-muted mb-0" *ngIf="!isRegister">Jus'potatoes</p>
-            <p class="text-muted mb-0" *ngIf="isRegister && !userValidationError">OPT sent to {{UserEmail}}</p>
+            <p class="text-muted mb-0" *ngIf="isRegister && !userValidationError">OPT sent to: <b>{{UserEmail}}</b></p>
             <br>
-            <p class="font-italic text-muted mb-0" *ngIf="userValidationError">It seems the OTP entered is incorrect</p>
+            <p class="font-italic text-danger text-muted mb-0" *ngIf="userValidationError">It seems the OTP entered is incorrect</p>
         </div>
 
         <!-- Registeration Form -->
         <div class="col-md-7 col-lg-6 ml-auto" *ngIf="!isRegister">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="username_exists">
+                <strong>Username: {{username_name_exists_value}} Exists!</strong> please choose a unique username.
+                <button type="button" class="btn-just-icon" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
             <form #f="ngForm" [mustMatch]="['password1', 'confirmPassword1']">
                 <div class="row">
 

@@ -10,8 +10,10 @@ import {response} from 'express';
 })
 export class RegisterComponent implements OnInit {
 
+
   constructor(private userService: UsersService, private router: Router) { }
 
+  username_name_exists_value = '';
   username;
   password;
   passwordConfirmation;
@@ -39,6 +41,7 @@ export class RegisterComponent implements OnInit {
   UserEmail: any = '';
   verify_one_moment: any = 'Verifying you, one moment...';
   text_status: any = 'warning';
+  username_exists: boolean = false;
   ngOnInit(): void {
 
   }
@@ -69,16 +72,24 @@ export class RegisterComponent implements OnInit {
       }
 
       this.userService.createNewUser(this.User).subscribe(createdUser => {
-        console.log(createdUser);
         let response: any = createdUser;
         if (response) {
-          this.isLoading = false;
-          const id: any = response._id;
-          // sessionStorage.setItem('userId', id)
-          this.registration_verify = 'Verify Account'
-          this.UserEmail = response.contact.email;
-          this.userId = id;
-          this.isRegister = true;
+          if(response.message != null && response.message === 'USERNAME EXISTS'){
+            this.username_exists = true;
+            this.isLoading = false;
+            setTimeout(() => {this.username_exists = false;}, 10000)
+            this.username_name_exists_value = this.User.username;
+          } else {
+            this.isLoading = false;
+            const id: any = response._id;
+            // sessionStorage.setItem('userId', id)
+            this.registration_verify = 'Verify Account'
+            this.UserEmail = response.contact.email;
+            this.userId = id;
+            this.isRegister = true;
+            this.username_exists  = false;
+          }
+
          // this.router.navigateByUrl('home').then(r => {});
         }
       }, error => {
