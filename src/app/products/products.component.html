@@ -2,23 +2,31 @@
 <div class="main-content" >
 
 <div class="container-fluid" align="center" *ngIf="isLoading">
-  <mat-spinner color="warn" ></mat-spinner>
+<!--  <mat-spinner color="warn" ></mat-spinner>-->
   <br><br>
   <!-- For Demo Purpose -->
   <div class="col-md-2">
     <img src="./assets/img/firebog-garden-sign-crop-01a-g1.svg" alt="" class="img-fluid">
-    <h6 class="text-warning">one second while we place your order...</h6>
-    <p class="font-italic text-muted mb-0">Jus'potatoes, we are potatoes</p>
+    <br>
+    <br>
+    <div class="spinner-border text-warning" style="width: 3rem; height: 3rem;" role="status">
+      <span class="visually-hidden"></span>
+    </div>
+    <h4 class="text-warning">one second while we place your order...</h4>
   </div>
 </div>
 <div class="container" align="center" *ngIf="isLoadingIsLoadingProducts">
-  <mat-spinner color="warn" ></mat-spinner>
+<!--  <mat-spinner color="warn" ></mat-spinner>-->
   <br><br>
   <!-- For Demo Purpose -->
   <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
     <img src="./assets/img/jus_potatoes.svg" alt="" class="img-fluid">
+    <br>
+    <br>
+    <div class="spinner-border text-warning" style="width: 3rem; height: 3rem;" role="status">
+      <span class="visually-hidden"></span>
+    </div>
     <h3 class="text-warning">loading products one second...</h3>
-    <p class="font-italic text-muted mb-0">Jus'potatoes, we are potatoes</p>
 
   </div>
 </div>

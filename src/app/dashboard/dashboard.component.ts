@@ -241,7 +241,15 @@ ManageUsersIsLoading: boolean = false;
         }
         this.usersService.updateRole(userRole).subscribe(userRoleResponse => {
             if (userRoleResponse) {
-                this.ngOnInit();
+                this.Users.forEach(user => {
+                    if(user._id === _id) {
+                        user.role = userRole.role;
+                        button.value = ''
+                        return
+                    }
+                })
+
+                //this.ngOnInit();
             }
         })
     }
@@ -266,8 +274,14 @@ ManageUsersIsLoading: boolean = false;
             console.log(acceptedOrder);
             if (acceptedOrder) {
                 this.acceptedOrder = true;
+                this.Orders.forEach(orderItem => {
+                    if(order._id == orderItem._id) {
+                        orderItem.order_status = 'ACCEPTED'
+                        button.value = ''
+                    }
+                })
             }
-            this.ngOnInit();
+            //this.ngOnInit();
         })
     }
 
@@ -277,9 +291,15 @@ ManageUsersIsLoading: boolean = false;
         button.value = 'loading'
         this.productService.declineOrder(order._id).subscribe(declinedOrder => {
             if(declinedOrder) {
-
+               // this.acceptedOrder = true;
+                this.Orders.forEach(orderItem => {
+                    if(order._id === orderItem._id) {
+                        orderItem.order_status = 'DECLINED'
+                        button.value = ''
+                    }
+                })
             }
-            this.ngOnInit() ;
+           // this.ngOnInit() ;
         })
     }
     dispatchOrder(order: any, button: HTMLButtonElement) {
@@ -287,9 +307,15 @@ ManageUsersIsLoading: boolean = false;
         button.value = 'loading'
         this.productService.dispatchOrder(order._id).subscribe(dispatchOrder => {
             if(dispatchOrder) {
-
+                    //this.acceptedOrder = true;
+                    this.Orders.forEach(orderItem => {
+                        if(order._id === orderItem._id) {
+                            orderItem.order_status = 'DISPATCHED'
+                            button.value = ''
+                        }
+                    })
             }
-            this.ngOnInit();
+           // this.ngOnInit();
         })
     }
 
@@ -298,8 +324,15 @@ ManageUsersIsLoading: boolean = false;
         button.value = 'loading'
         this.productService.reverseOrder(order._id).subscribe(reverseOrder => {
            if(reverseOrder) {
+               this.acceptedOrder = true;
+               this.Orders.forEach(orderItem => {
+                   if(order._id === orderItem._id) {
+                       orderItem.order_status = 'ACCEPTED'
+                       button.value = ''
+                   }
+               })
            }
-            this.ngOnInit();
+           // this.ngOnInit();
         })
     }
 
