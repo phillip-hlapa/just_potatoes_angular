@@ -1,20 +1,24 @@
-<div class="container" align="center" *ngIf="isLoading">
-    <mat-spinner color="warn" ></mat-spinner>
-    <br><br>
-    <!-- For Demo Purpose -->
-    <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
-        <img src="./assets/img/mail-message-new.svg" alt="" class="img-fluid mb-3 d-none d-md-block">
-        <h3 class="text-warning">Sending reply, one sec...</h3>
+
+
+
+
+<div class="main-content">
+<div class="container container-fluid" align="center">
+    <div class="container" align="center" *ngIf="isLoading">
+        <br><br>
+        <!-- For Demo Purpose -->
+        <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
+            <div class="spinner-border text-warning" style="width: 3rem; height: 3rem;" role="status">
+                <span class="visually-hidden"></span>
+            </div>
+            <br>
+            <!--        <img src="./assets/img/mail-message-new.svg" alt="" class="img-fluid mb-3 d-none d-md-block">-->
+            <h3 class="text-warning">Sending reply, one sec...</h3>
+
+        </div>
 
     </div>
-
-</div>
-
-
-
-<div class="main-content" *ngIf="!isLoading">
-<div class="container container-fluid" align="center">
-<div class="row">
+<div class="row"  *ngIf="!isLoading">
     <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
         <img src="./assets/img/Minduka_Notebook.svg" alt="" class="img-fluid">
     </div>
