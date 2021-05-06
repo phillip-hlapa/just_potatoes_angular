@@ -10,7 +10,7 @@
 <!--    </nav>-->
 <!--</header>-->
 
-<div class="container" align="center" *ngIf="isLoading">
+<div class="container" align="center" *ngIf="isLoading && !isLoadingOTP">
     <br><br>
     <br><br>
     <!-- For Demo Purpose -->
@@ -23,21 +23,36 @@
                 </div>
             </div>
         </div>
-        <h5 class="text-warning">Registering you! one moment</h5>
-        <p class="font-italic text-muted mb-0">Jus'potatoes, we are potatoes</p>
-
+        <br>
+        <h4 class="text-{{text_status}}">Registering you! one moment</h4>
     </div>
-
 </div>
 
-<div class="container" *ngIf="!isLoading">
+<div class="container" align="center" *ngIf="isLoadingOTP && !isLoading">
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
+    <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border text-{{text_status}}" style="width: 3rem; height: 3rem;" role="status">
+            <span class="visually-hidden"></span>
+        </div>
+    </div>
+     <br>
+        <h4 class="text-{{text_status}}">{{verify_one_moment}}</h4>
+    </div>
+</div>
+
+<div class="container" *ngIf="!isLoading && !isLoadingOTP">
     <div class="row py-5 mt-4 align-items-center">
         <!-- For Demo Purpose -->
         <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
             <img src="./assets/img/jus_potatoes.svg" alt="" class="img-fluid mb-3 d-none d-md-block">
-            <h2 class="text-muted text-warningtext-muted text-warning">Registration!</h2>
+            <h2 class="text-muted text-warningtext-muted text-warning">{{registration_verify}}</h2>
             <p class="text-muted mb-0" *ngIf="!isRegister">Jus'potatoes</p>
-            <p class="font-italic text-muted mb-0" *ngIf="isRegister && !userValidationError">Please verify account with the OTP sent to your email!</p>
+            <p class="text-muted mb-0" *ngIf="isRegister && !userValidationError">OPT sent to {{UserEmail}}</p>
+            <br>
             <p class="font-italic text-muted mb-0" *ngIf="userValidationError">It seems the OTP entered is incorrect</p>
         </div>
 

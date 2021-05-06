@@ -32,13 +32,25 @@ export class RegisterComponent implements OnInit {
 
   userValidationError;
   isLoading: boolean = false;
+  isLoadingOTP: boolean = false;
 
+  userId: any = '';
+  registration_verify: any = 'Registration!';
+  UserEmail: any = '';
+  verify_one_moment: any = 'Verifying you, one moment...';
+  text_status: any = 'warning';
   ngOnInit(): void {
+
   }
 
 
   register() {
 
+    try {
+      sessionStorage.removeItem('userId')
+    }catch (error) {
+      console.log(error)
+    }
     if (this.password !== this.passwordConfirmation) {
       console.log('not valid 1')
         this.formIsValid = false;
@@ -62,7 +74,10 @@ export class RegisterComponent implements OnInit {
         if (response) {
           this.isLoading = false;
           const id: any = response._id;
-          sessionStorage.setItem('userId', id)
+          // sessionStorage.setItem('userId', id)
+          this.registration_verify = 'Verify Account'
+          this.UserEmail = response.contact.email;
+          this.userId = id;
           this.isRegister = true;
          // this.router.navigateByUrl('home').then(r => {});
         }
@@ -76,9 +91,10 @@ export class RegisterComponent implements OnInit {
 
 
   verifyOTP() {
+    this.isLoadingOTP = true;
     let otp_response: any;
     const verifyOtp = {
-      userid: sessionStorage.getItem('userId'),
+      userid: this.userId,
       otp: this.optValue
 
     }
@@ -86,11 +102,19 @@ export class RegisterComponent implements OnInit {
       this.userService.verifyViaOTP(verifyOtp).subscribe(response => {
         otp_response = response;
         if (otp_response.message === 'USER VALIDATED USING OTP') {
-          this.router.navigateByUrl('home').then(r => {});
+          sessionStorage.setItem('userId', this.userId)
+          this.text_status = 'success';
+          this.verify_one_moment = 'verify complete... Taking you to home page!'
+          setTimeout(() => {
+            this.isLoadingOTP = false;
+            this.router.navigateByUrl('home').then(r => {});
+          }, 3000)
         } else {
+          this.isLoadingOTP = false;
           this.userValidationError = true;
         }
       }, error => {
+        this.isLoadingOTP = false;
         this.userValidationError = true;
       })
   }

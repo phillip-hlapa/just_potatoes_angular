@@ -191,14 +191,7 @@ ManageUsersIsLoading: boolean = false;
       // start animation for the Emails Subscription Chart
       this.startAnimationForBarChart(websiteViewsChart);
 
-      this.usersService.getUsers().subscribe(users => {
-        this.Users = users;
-        this.UsersSize = this.Users.length;
-        if(users) {
-            this.UsersSizeIsLoading = false;
-            this.ManageUsersIsLoading = false;
-        }
-      })
+      this.loadUsers();
 
       this.productService.getOrders().subscribe(response => {
           this.Orders = response;
@@ -221,11 +214,26 @@ ManageUsersIsLoading: boolean = false;
 
 
   }
+
+  public loadUsers() {
+      this.usersService.getUsers().subscribe(users => {
+          this.Users = users;
+          this.UsersSize = this.Users.length;
+          if(users) {
+              this.UsersSizeIsLoading = false;
+              this.ManageUsersIsLoading = false;
+          }
+      })
+  }
   onDelete(userId, button: HTMLButtonElement) {
       console.log(userId)
       button.value = 'loading';
-      this.usersService.deleteUser(userId).subscribe(message => {console.log(message)})
-      this.ngOnInit();
+      this.usersService.deleteUser(userId).subscribe(message => {
+          if(message) {
+              this.loadUsers()
+          }
+      })
+      //this.ngOnInit();
   }
 
   // update user role
