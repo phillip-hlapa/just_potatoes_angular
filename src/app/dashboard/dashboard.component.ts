@@ -31,11 +31,20 @@ revenue = 0;
 //spinner
 isLoading: boolean = false;
 
+revenueIsLoading: boolean = false;
+UsersSizeIsLoading: boolean = false;
+MessageLengthIsLoading: boolean = false;
+FollowersIsLoading: boolean = false;
+
+ManageOrdersIsLoading: boolean = false;
+ManageUsersIsLoading: boolean = false;
+
   // deleting users
     acceptedOrder = false;
     role: any;
     Messages: any;
     MessageLength: any;
+
 
 
   constructor(private messagesService: MessagesService, private usersService: UsersService, private productService: ProductService) { }
@@ -94,7 +103,13 @@ isLoading: boolean = false;
 
       seq2 = 0;
   }  ngOnInit() {
+     this.revenueIsLoading = true;
+     this.UsersSizeIsLoading = true;
+     this.MessageLengthIsLoading = true;
+     this.FollowersIsLoading = true;
 
+     this.ManageOrdersIsLoading =  true;
+     this.ManageUsersIsLoading = true;
       /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
 
 
@@ -179,11 +194,16 @@ isLoading: boolean = false;
       this.usersService.getUsers().subscribe(users => {
         this.Users = users;
         this.UsersSize = this.Users.length;
+        if(users) {
+            this.UsersSizeIsLoading = false;
+            this.ManageUsersIsLoading = false;
+        }
       })
 
       this.productService.getOrders().subscribe(response => {
           this.Orders = response;
           if (this.Orders) {
+              this.ManageOrdersIsLoading =  false;
               this.calculateRevenue(this.Orders);
           }
       }, error => {
@@ -294,9 +314,15 @@ isLoading: boolean = false;
         })
     }
     // revenue calculation
+
+
     calculateRevenue(orders: any) {
       orders.forEach(order => {
           this.revenue = this.revenue + order.order_total;
+          if(order) {
+              this.revenueIsLoading = false;
+              this.FollowersIsLoading = false;
+          }
       })
     }
     getMessages() {
@@ -319,6 +345,7 @@ isLoading: boolean = false;
                         console.log(err)
                     });
                 }
+                this.MessageLengthIsLoading = false;
             }
         }, error => {})
         this.isLoading = false;
