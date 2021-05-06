@@ -230,7 +230,8 @@ ManageUsersIsLoading: boolean = false;
       button.value = 'loading';
       this.usersService.deleteUser(userId).subscribe(message => {
           if(message) {
-              this.loadUsers()
+            //  this.loadUsers()
+              this.ngOnInit()
           }
       })
       //this.ngOnInit();
