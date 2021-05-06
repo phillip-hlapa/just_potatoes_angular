@@ -51,7 +51,7 @@
             <img src="./assets/img/jus_potatoes.svg" alt="" class="img-fluid mb-3 d-none d-md-block">
             <h2 class="text-muted text-warningtext-muted text-warning">{{registration_verify}}</h2>
             <p class="text-muted mb-0" *ngIf="!isRegister">Jus'potatoes</p>
-            <p class="text-muted mb-0" *ngIf="isRegister && !userValidationError">OPT sent to: <b>{{UserEmail}}</b></p>
+            <p class="text-muted mb-0" *ngIf="isRegister && !userValidationError">OTP sent to: <b>{{UserEmail}}</b></p>
             <br>
             <p class="font-italic text-danger text-muted mb-0" *ngIf="userValidationError">It seems the OTP entered is incorrect</p>
         </div>
@@ -177,7 +177,7 @@
                                 <i class="fa fa-user text-muted"></i>
                             </span>
             </div>
-            <input id="optValue" type="text" name="optValue" id="optValue" [(ngModel)]="optValue" placeholder="optValue" class="form-control bg-white border-left-0 border-md">
+            <input id="optValue" type="text" name="optValue" id="optValue" [(ngModel)]="optValue" placeholder="OTP" class="form-control bg-white border-left-0 border-md">
             <div class="form-group col-lg-12 mx-auto mb-0">
                 <a (click)="verifyOTP()" class="btn btn-warning btn-block py-2">
                     <span class="font-weight-bold">Verify Account</span>

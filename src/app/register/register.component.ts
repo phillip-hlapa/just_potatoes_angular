@@ -118,7 +118,7 @@ export class RegisterComponent implements OnInit {
           sessionStorage.setItem('userId', this.userId)
           sessionStorage.setItem('userRole', this.userRole)
           this.text_status = 'success';
-          this.verify_one_moment = 'verify complete... Taking you to home page!'
+          this.verify_one_moment = 'Complete!! Taking you to home page...'
           setTimeout(() => {
             this.isLoadingOTP = false;
             this.router.navigateByUrl('home').then(r => {});
