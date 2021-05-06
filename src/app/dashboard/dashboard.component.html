@@ -50,7 +50,7 @@
                             <i class="material-icons">info_outline</i>
                         </div>
                         <p class="card-category">Number of notifications</p>
-                        <a class="nav-link"  class="card-title" *ngIf="!MessageLengthIsLoading" [routerLink]="['/contact-admin']" >{{MessageLength}}</a>
+                        <a class="nav-link"  class="card-title" *ngIf="!MessageLengthIsLoading" [routerLink]="['/contact-admin']" ><b>{{MessageLength}}</b></a>
                         <div class="spinner-border text-danger" role="status" *ngIf="MessageLengthIsLoading">
                             <span class="visually-hidden"></span>
                         </div>

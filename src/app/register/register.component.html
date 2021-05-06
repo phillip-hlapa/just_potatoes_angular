@@ -1,14 +1,14 @@
 <!-- Navbar-->
-<header class="header"  *ngIf="!isLoading">
-    <nav class="navbar navbar-expand-lg navbar-light py-3">
-        <div class="container">
-            <!-- Navbar Brand -->
-            <a href="#" class="navbar-brand">
-                <h3 width="150">Jus'Potatoes</h3>
-            </a>
-        </div>
-    </nav>
-</header>
+<!--<header class="header"  *ngIf="!isLoading">-->
+<!--    <nav class="navbar navbar-expand-lg navbar-light py-3">-->
+<!--        <div class="container">-->
+<!--            &lt;!&ndash; Navbar Brand &ndash;&gt;-->
+<!--            <a href="#" class="navbar-brand">-->
+<!--                <h3 width="150">Jus'Potatoes</h3>-->
+<!--            </a>-->
+<!--        </div>-->
+<!--    </nav>-->
+<!--</header>-->
 
 <div class="container" align="center" *ngIf="isLoading">
     <br><br>
@@ -35,8 +35,8 @@
         <!-- For Demo Purpose -->
         <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
             <img src="./assets/img/jus_potatoes.svg" alt="" class="img-fluid mb-3 d-none d-md-block">
-            <h1>Register with us to get the best service!</h1>
-            <p class="font-italic text-muted mb-0" *ngIf="!isRegister">all about potatoes, Jus'potatoes</p>
+            <h2 class="text-muted text-warningtext-muted text-warning">Registration!</h2>
+            <p class="text-muted mb-0" *ngIf="!isRegister">Jus'potatoes</p>
             <p class="font-italic text-muted mb-0" *ngIf="isRegister && !userValidationError">Please verify account with the OTP sent to your email!</p>
             <p class="font-italic text-muted mb-0" *ngIf="userValidationError">It seems the OTP entered is incorrect</p>
         </div>
