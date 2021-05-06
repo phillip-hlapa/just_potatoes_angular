@@ -6,12 +6,15 @@
   <br><br>
   <!-- For Demo Purpose -->
   <div class="col-md-2">
-    <img src="./assets/img/firebog-garden-sign-crop-01a-g1.svg" alt="" class="img-fluid">
+<!--    <img src="./assets/img/firebog-garden-sign-crop-01a-g1.svg" alt="" class="img-fluid">-->
+
     <br>
     <br>
     <div class="spinner-border text-warning" style="width: 3rem; height: 3rem;" role="status">
       <span class="visually-hidden"></span>
     </div>
+    <br>
+    <br>
     <h4 class="text-warning">one second while we place your order...</h4>
   </div>
 </div>
@@ -45,7 +48,30 @@
 
 <div class="container" *ngIf="!isLoading && submitButtonAvailable && !isLoadingIsLoadingProducts" align="center">
 <div class="col">
-<!--<table class="table" >-->
+
+<!--  <div class="main-content" >-->
+<!--    <div class="row justify-content-center">-->
+<!--      <div class="col-12 col-md-4 col-sm-12 col-xs-12">-->
+<!--        <div class="card pl-4 pr-3 py-2">-->
+<!--          <div class="div1 row py-4 px-2">-->
+<!--            <div class="col-3 mt-2"> <button class="btn discBtn text-white p-1 p-md-2">-25%</button> </div>-->
+<!--            <div class="col-6 d-flex justify-content-center"> <img src="./assets/img/products/sample.jpg" height="" width="150%" alt=""> </div>-->
+<!--            <div class="col-3 d-flex flex-column pl-4"> <i class="fa fa-heart fa-lg mt-4" aria-hidden="true"></i> <i class="fa fa-balance-scale mt-3 font-weight-bold" aria-hidden="true"></i> </div>-->
+<!--          </div>-->
+<!--          <div class="py-2">-->
+<!--            <p class="ml-3 ml-md-5"> <i class="fa fa-paw" aria-hidden="true"></i> <span class="small">20</span> <i class="fa fa-arrows ml-4" aria-hidden="true"></i> <span class="small"> 0% 12m</span> </p>-->
+<!--            <h5>Smartphone Apple iPhone Xs 64GB E2 Silver</h5>-->
+<!--            <p> Apple A12, 4 GB, 64GB </p>-->
+<!--            <div class="d-flex">-->
+<!--              <h5 class="align-self-center">Rs. 29 999</h5> <button class="buy d-flex ml-auto font-weight-bold pl-4 pr-5 py-2 border-0"> Buy </button> <span class="cart text-white d-flex p-2"><i class="fa fa-shopping-cart fa-lg align-self-center" aria-hidden="true"></i></span>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+
+  <!--<table class="table" >-->
 <!--  <tr *ngFor="let product of Products">-->
 <!--    <td>-->
 <!--      <div class="card mb-2" style="max-width: 600px;">-->
@@ -70,15 +96,13 @@
 <!--    </td>-->
 <!--    </tr>-->
 <!--</table>-->
-  <br>
-  <h2 class="font-weight-bold mb-2">From The Shop</h2>
-  <p class="font-italic text-muted mb-4">Jus'Potatoes, only the finest quality!</p>
 
   <div class="row pb-5 mb-4" *ngFor="let product of Products">
-    <div class="col-lg-6 col-md-6 mb-4 mb-lg-0">
+    <div class="row justify-content-center">
+      <div class="col-10 col-md-3 col-md-10 col-xs-10">
       <!-- Card-->
       <div class="card rounded shadow-sm border-0">
-        <div class="card-body p-2"><img src="./assets/img/products/sample.jpg" alt="" class="img-fluid d-block mx-auto mb-3">
+        <div class="card-body p-2"><img src="{{product.product_path}}" alt="" class="img-fluid d-block mx-auto mb-3">
           <h5> <a  class="text-dark">{{product.product_name}} <br> <h5 class="header-title"><b>{{product.product_currency}}{{product.product_price}}</b></h5></a></h5>
           <p class="text-muted">{{product.product_description}}</p>
           <ul class="list-inline small">
@@ -93,6 +117,7 @@
           <button type="button" [hidden]="!isUserAdmin() || !isSignedIn()"  data-toggle="modal" data-target="#exampleModal"  (click)="edit_product(product._id)" name="button" mat-raised-button color="secondary" [disabled]="!canOrder">EDIT</button>
         </div>
       </div>
+    </div>
     </div>
   </div>
 <table *ngIf="isThereOrder" class="table table-striped">
