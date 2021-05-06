@@ -37,6 +37,7 @@ export class RegisterComponent implements OnInit {
   isLoadingOTP: boolean = false;
 
   userId: any = '';
+  userRole: any = 'NORMAL'
   registration_verify: any = 'Registration!';
   UserEmail: any = '';
   verify_one_moment: any = 'Verifying you, one moment...';
@@ -51,6 +52,7 @@ export class RegisterComponent implements OnInit {
 
     try {
       sessionStorage.removeItem('userId')
+      sessionStorage.removeItem('userRole')
     }catch (error) {
       console.log(error)
     }
@@ -77,7 +79,7 @@ export class RegisterComponent implements OnInit {
           if(response.message != null && response.message === 'USERNAME EXISTS'){
             this.username_exists = true;
             this.isLoading = false;
-            setTimeout(() => {this.username_exists = false;}, 10000)
+            setTimeout(() => {this.username_exists = false;}, 6000)
             this.username_name_exists_value = this.User.username;
           } else {
             this.isLoading = false;
@@ -114,6 +116,7 @@ export class RegisterComponent implements OnInit {
         otp_response = response;
         if (otp_response.message === 'USER VALIDATED USING OTP') {
           sessionStorage.setItem('userId', this.userId)
+          sessionStorage.setItem('userRole', this.userRole)
           this.text_status = 'success';
           this.verify_one_moment = 'verify complete... Taking you to home page!'
           setTimeout(() => {

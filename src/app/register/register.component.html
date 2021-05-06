@@ -58,9 +58,15 @@
 
         <!-- Registeration Form -->
         <div class="col-md-7 col-lg-6 ml-auto" *ngIf="!isRegister">
-            <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="username_exists">
-                <strong>Username: {{username_name_exists_value}} Exists!</strong> please choose a unique username.
-                <button type="button" class="btn-just-icon" data-bs-dismiss="alert" aria-label="Close"></button>
+<!--            <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="username_exists">-->
+<!--                <strong>Username: {{username_name_exists_value}} Exists!</strong> please choose a unique username.-->
+<!--                <button type="button" class="btn-just-icon" data-bs-dismiss="alert" aria-label="Close"></button>-->
+<!--            </div>-->
+            <div class="alert alert-warning d-flex align-items-center" role="alert" *ngIf="username_exists">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                <div>
+                    <p class="text-muted">username: <strong>{{username_name_exists_value}}</strong> exists! please choose a unique one.</p>
+                </div>
             </div>
             <form #f="ngForm" [mustMatch]="['password1', 'confirmPassword1']">
                 <div class="row">
