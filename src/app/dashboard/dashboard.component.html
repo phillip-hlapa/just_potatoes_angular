@@ -212,7 +212,7 @@
         </div>
         <!-- WHERE THE SECOND TABLE START USERS -->
         <div class="row"> <!--HERE -->
-            <div class="col-lg-12 col-md-12">
+            <div class="col-lg-12 col-md-12 col-sm-8">
 <!--                <div class="text-center" *ngIf="ManageUsersIsLoading">-->
 <!--                    <div class="spinner-border text-center text-success" style="width: 3rem; height: 3rem;" role="status" >-->
 <!--                        <span class="visually-hidden"></span>-->
@@ -221,15 +221,8 @@
 <!--                    <span class="text-muted"><b>loading users</b></span>-->
 <!--                </div>-->
 <!--&lt;!&ndash;                <div class="card"  *ngIf="!ManageUsersIsLoading">&ndash;&gt;-->
-                <div class="card"  *ngIf="!ManageUsersIsLoading">
-                    <div class="card-header card-header-success">
-                        <h4 class="card-title">Manage Users</h4>
-                        <p class="card-category">Active users of the Jus' Potatoes</p>
-                    </div>
 
-                    <div class="col-md-12" *ngFor="let user of Users">
-                        <div class="col-md-12">
-                            <div class="col-md-10 col-md-10 col-sm-8" >
+                    <div *ngFor="let user of Users">
                                 <div class="card card-stats">
                                     <div class="card-header card-header-warning card-header-icon">
                                         <div class="card-icon">
@@ -269,18 +262,16 @@
                                     <div class="card-footer">
                                         <div class="stats">
                                             <i class="material-icons text-success">info</i>
-                                            <p><b><span class="text-muted text-uppercase">Street Name:</span> {{user.address.street_name}}</b></p>
+                                            <p><b><span class="text-muted text-uppercase">City:</span> {{user.address.city}}</b></p>
                                         </div>
                                     </div>
                                     <div class="card-footer">
                                         <div class="stats">
                                             <i class="material-icons text-success">info</i>
-                                            <p><b><span class="text-muted text-uppercase">City:</span> {{user.address.city}}</b></p>
+                                            <p><b><span class="text-muted text-uppercase">Date Created:</span> {{user.dateCreated}}</b></p>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
                     </div>
 
 <!--                    <div class="card-body table-responsive">-->
@@ -318,7 +309,7 @@
 <!--                            </tbody>-->
 <!--                        </table>-->
 <!--                    </div>-->
-                </div>
             </div>
         </div>
     </div>
+</div>
