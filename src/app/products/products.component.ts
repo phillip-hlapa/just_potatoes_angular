@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/products/product.service';
 import {UsersService} from '../../services/users/users.service';
 import {Router} from '@angular/router';
+import {MatButton} from "@angular/material/button";
 
 @Component({
   selector: 'app-products',
@@ -57,7 +58,8 @@ export class ProductsComponent implements OnInit {
          this.Edit_Product = editProduct;
       })
   }
-  public add_product(product_id: any) {
+  public add_product(product_id: any, button: HTMLButtonElement) {
+      button.value = 'loading'
       let productExists = false
       if(this.Order.indexOf(product_id) === -1) {
           this.Order.push(product_id);
@@ -72,10 +74,10 @@ export class ProductsComponent implements OnInit {
           this.isThereOrder = false;
           productExists = false;
       }
-      this.doOrder(product_id, productExists);
+      this.doOrder(product_id, productExists, button);
   }
 
-  private doOrder(product_id, productExists) {
+  private doOrder(product_id, productExists, button) {
           this.productService.getProduct(product_id).subscribe(productOrdered => {
               const orderedProduct: any = productOrdered;
               this.submitButtonAvailable = true;
@@ -90,6 +92,7 @@ export class ProductsComponent implements OnInit {
                   this.OrderedProducts.push(productOrdered);
               }
               // console.log(this.OrderTotal)
+              button.value = '';
           })
   }
   private deleteProdFromOrder(product_id: any) {

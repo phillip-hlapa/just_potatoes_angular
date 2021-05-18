@@ -112,7 +112,11 @@
             <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
             <li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>
           </ul>
-          <button type="button"  (click)="add_product(product._id)" name="button" mat-raised-button color="accent" [disabled]="!canOrder">ADD</button>
+          <button type="button" #addButton1 (click)="add_product(product._id, addButton1)" name="button" mat-raised-button color="accent" [disabled]="!canOrder">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="addButton1.value === 'loading'"></span>
+            <span class="visually-hidden" *ngIf="addButton1.value === 'loading'"></span>
+            <span *ngIf="addButton1.value != 'loading'">ADD</span>
+          </button>
          &nbsp;&nbsp;
           <button type="button" [hidden]="!isUserAdmin() || !isSignedIn()"  data-toggle="modal" data-target="#exampleModal"  (click)="edit_product(product._id)" name="button" mat-raised-button color="secondary" [disabled]="!canOrder">EDIT</button>
         </div>
