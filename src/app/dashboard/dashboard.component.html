@@ -226,41 +226,89 @@
                         <h4 class="card-title">Manage Users</h4>
                         <p class="card-category">Active users of the Jus' Potatoes</p>
                     </div>
-                    <div class="card-body table-responsive">
-                        <table class="table table-hover" >
-                            <thead class="text-warning">
-                            <th>City</th>
-                            <th>Username</th>
-                            <th>Email</th>
-                            <th>Street Name</th>
-                            <th>Role</th>
-                            <th *ngIf="userIsAdmin">Update Role</th>
-                            <th *ngIf="userIsAdmin">Delete</th>
 
-                            </thead>
-                            <tbody>
-                            <tr *ngFor="let user of Users">
-                                <td *ngIf="user.address.city">{{user.address.city}}</td>
-                                <td *ngIf="!user.address.city">JOHANNESBURG</td>
-                                <td>{{user.username}}</td>
-                                <td>{{user.contact.email}}</td>
-                                <td>{{user.address.street_name}}</td>
-                                <td><label id="role" class="form-control" disabled>{{user.role}}</label></td>
-                                <td><button type="button" name="button" #buttonUpdateRole (click)="onUpdateRole(user._id, buttonUpdateRole)" *ngIf="userIsAdmin" class="btn btn-outline-secondary btn-sm">
-                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="buttonUpdateRole.value === 'loading'"></span>
-                                    <span class="visually-hidden" *ngIf="buttonUpdateRole.value === 'loading'"></span>
-                                    <span *ngIf="buttonUpdateRole.value != 'loading'">Update Role</span>
-                                </button></td>
-                                <td><button type="button" name="button" #buttonDeleteUser (click)="onDelete(user._id, buttonDeleteUser)" *ngIf="userIsAdmin" class="btn btn-outline-danger btn-sm">
-                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="buttonDeleteUser.value === 'loading'"></span>
-                                    <span class="visually-hidden" *ngIf="buttonDeleteUser.value === 'loading'"></span>
-                                    <span *ngIf="buttonDeleteUser.value != 'loading'">Remove</span>
-                                </button>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                    <div class="col-md-12" *ngFor="let user of Users">
+                        <div class="col-md-12" align="center">
+                            <div class="col-lg-6 col-md-7 col-sm-7" >
+                                <div class="card card-stats">
+                                    <div class="card-header card-header-warning card-header-icon">
+                                        <div class="card-icon">
+                                            <i class="material-icons">content_copy</i>
+                                        </div>
+                                        <p class="card-category">{{user.contact.email}}</p>
+                                        <h3 class="card-title">
+                                            <small class="text-warning"><b>{{user.username}}</b></small> <br>
+                                            <small class="text-muted">Role: {{user.role}}</small> <br>
+                                            <button type="button" name="button" #buttonDeleteUser (click)="onDelete(user._id, buttonDeleteUser)" *ngIf="userIsAdmin" class="btn btn-outline-danger btn-sm">
+                                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="buttonDeleteUser.value === 'loading'"></span>
+                                                <span class="visually-hidden" *ngIf="buttonDeleteUser.value === 'loading'"></span>
+                                                <span *ngIf="buttonDeleteUser.value != 'loading'">Remove</span>
+                                            </button> <br>
+                                            <button type="button" name="button" #buttonUpdateRole (click)="onUpdateRole(user._id, buttonUpdateRole)" *ngIf="userIsAdmin" class="btn btn-outline-secondary btn-sm">
+                                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="buttonUpdateRole.value === 'loading'"></span>
+                                                <span class="visually-hidden" *ngIf="buttonUpdateRole.value === 'loading'"></span>
+                                                <span *ngIf="buttonUpdateRole.value != 'loading'">Update.</span>
+                                            </button>
+                                        </h3>
+<!--                                        <div class="spinner-border text-warning" role="status">-->
+<!--                                            <span class="visually-hidden"></span>-->
+<!--                                        </div>-->
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats">
+                                            <i class="material-icons text-success">info</i>
+                                            <p><b>House No.: {{user.address.house_number}}</b></p>
+                                        </div>
+                                        <br>
+                                        <div class="stats">
+                                            <i class="material-icons text-success">info</i>
+                                            <p><b>Street Name: {{user.address.street_name}}</b></p>
+                                        </div>
+                                        <div class="stats">
+                                            <i class="material-icons text-success">info</i>
+                                            <p><b>Street Name: {{user.address.street_name}}</b></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+<!--                    <div class="card-body table-responsive">-->
+<!--                        <table class="table table-hover" >-->
+<!--                            <thead class="text-warning">-->
+<!--                            <th>City</th>-->
+<!--                            <th>Username</th>-->
+<!--                            <th>Email</th>-->
+<!--                            <th>Street Name</th>-->
+<!--                            <th>Role</th>-->
+<!--                            <th *ngIf="userIsAdmin">Update Role</th>-->
+<!--                            <th *ngIf="userIsAdmin">Delete</th>-->
+
+<!--                            </thead>-->
+<!--                            <tbody>-->
+<!--                            <tr *ngFor="let user of Users">-->
+<!--                                <td *ngIf="user.address.city">{{user.address.city}}</td>-->
+<!--                                <td *ngIf="!user.address.city">JOHANNESBURG</td>-->
+<!--                                <td>{{user.username}}</td>-->
+<!--                                <td>{{user.contact.email}}</td>-->
+<!--                                <td>{{user.address.street_name}}</td>-->
+<!--                                <td><label id="role" class="form-control" disabled>{{user.role}}</label></td>-->
+<!--                                <td><button type="button" name="button" #buttonUpdateRole (click)="onUpdateRole(user._id, buttonUpdateRole)" *ngIf="userIsAdmin" class="btn btn-outline-secondary btn-sm">-->
+<!--                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="buttonUpdateRole.value === 'loading'"></span>-->
+<!--                                    <span class="visually-hidden" *ngIf="buttonUpdateRole.value === 'loading'"></span>-->
+<!--                                    <span *ngIf="buttonUpdateRole.value != 'loading'">Update Role</span>-->
+<!--                                </button></td>-->
+<!--                                <td><button type="button" name="button" #buttonDeleteUser (click)="onDelete(user._id, buttonDeleteUser)" *ngIf="userIsAdmin" class="btn btn-outline-danger btn-sm">-->
+<!--                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="buttonDeleteUser.value === 'loading'"></span>-->
+<!--                                    <span class="visually-hidden" *ngIf="buttonDeleteUser.value === 'loading'"></span>-->
+<!--                                    <span *ngIf="buttonDeleteUser.value != 'loading'">Remove</span>-->
+<!--                                </button>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                            </tbody>-->
+<!--                        </table>-->
+<!--                    </div>-->
                 </div>
             </div>
         </div>
