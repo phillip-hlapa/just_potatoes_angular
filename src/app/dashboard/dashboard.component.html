@@ -238,7 +238,7 @@
                                         <p class="card-category">{{user.contact.email}}</p>
                                         <h3 class="card-title">
                                             <small class="text-warning"><b>{{user.username}}</b></small> <br>
-                                            <small class="text-muted">Role: {{user.role}}</small> <br>
+                                            <small class="text-muted">ROLE: {{user.role}}</small> <br>
                                             <button type="button" name="button" #buttonDeleteUser (click)="onDelete(user._id, buttonDeleteUser)" *ngIf="userIsAdmin" class="btn btn-outline-danger btn-sm">
                                                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="buttonDeleteUser.value === 'loading'"></span>
                                                 <span class="visually-hidden" *ngIf="buttonDeleteUser.value === 'loading'"></span>
@@ -257,16 +257,25 @@
                                     <div class="card-footer">
                                         <div class="stats">
                                             <i class="material-icons text-success">info</i>
-                                            <p><b>House No.: {{user.address.house_number}}</b></p>
+                                            <p><b><span class="text-muted text-uppercase">House No.:</span> {{user.address.house_number}}</b></p>
                                         </div>
-                                        <br>
+                                    </div>
+                                    <div class="card-footer">
                                         <div class="stats">
                                             <i class="material-icons text-success">info</i>
-                                            <p><b>Street Name: {{user.address.street_name}}</b></p>
+                                            <p><b><span class="text-muted text-uppercase">Street Name:</span> {{user.address.street_name}}</b></p>
                                         </div>
+                                    </div>
+                                    <div class="card-footer">
                                         <div class="stats">
                                             <i class="material-icons text-success">info</i>
-                                            <p><b>Street Name: {{user.address.street_name}}</b></p>
+                                            <p><b><span class="text-muted text-uppercase">Street Name:</span> {{user.address.street_name}}</b></p>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats">
+                                            <i class="material-icons text-success">info</i>
+                                            <p><b><span class="text-muted text-uppercase">City:</span> {{user.address.city}}</b></p>
                                         </div>
                                     </div>
                                 </div>
