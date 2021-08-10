@@ -7,7 +7,7 @@ import {LogsService} from "../../services/logs/logs.service";
   styleUrls: ['./debug.component.css']
 })
 export class DebugComponent implements OnInit {
-  length: any = 100;
+  length: any = 1000;
   pageIndex: any;
   pageSize: any;
   pageEvent: any;

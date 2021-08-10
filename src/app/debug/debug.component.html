@@ -28,26 +28,28 @@
             <thead>
             <tr>
                 <th class="th-sm">Date</th>
+                <th class="th-sm">Time</th>
                 <th class="th-sm">Status</th>
                 <th class="th-sm">Message</th>
-                <th class="th-sm">Username</th>
+<!--                <th class="th-sm">Username</th>-->
             </tr>
             </thead>
             <tbody>
 
-            <tr *ngFor="let log of Logs" [class]="log.status === 'SUCCESSFUL' ? 'table-success' : '' ">
+            <tr *ngFor="let log of Logs" [class]="log.status === 'SUCCESSFUL' ? 'table-success' : log.status === 'UNSUCCESSFUL' ? 'table-danger' : '' ">
                 <td>{{log.date.split('T')[0]}}</td>
+                <td>{{log.date.split('T')[1]}}</td>
                 <td >{{log.status}}</td>
                 <td>{{log.message}}</td>
-                <td>{{log.username}}</td>
+<!--                <td>{{log.username}}</td>-->
             </tr>
             </tbody>
             <tfoot>
             <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Age</th>
+                <th class="th-sm">Date</th>
+                <th class="th-sm">Time</th>
+                <th class="th-sm">Status</th>
+                <th class="th-sm">Message</th>
             </tr>
             </tfoot>
         </table>
